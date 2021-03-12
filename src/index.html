@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="stories.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    </head>
+    <body> 
+        <body class="theme_light">
+            <script type="text/javascript" src="stories.js"></script>
+            <script>
+
+                var data = {
+                    "alias": "leaders",
+                    "data": {
+                      "title": "Больше всего коммитов",
+                      "subtitle": "Спринт № 213",
+                      "emoji": "👑",
+                      "users": [
+                        {"id": 3, "name": "Дарья Ковалева", "avatar": "3.jpg", "valueText": "32"},
+                        {"id": 9, "name": "Сергей Бережной", "avatar": "9.jpg", "valueText": "27"},
+                        {"id": 7, "name": "Дмитрий Андриянов", "avatar": "7.jpg", "valueText": "22"},
+                        {"id": 6, "name": "Андрей Мокроусов", "avatar": "6.jpg", "valueText": "20"},
+                        {"id": 8, "name": "Александр Иванков", "avatar": "8.jpg", "valueText": "19"}
+                      ]
+                    }
+                };
+
+                const body = document.querySelector('body');
+                body.innerHTML = window.renderTemplate(data.alias, data.data);
+            </script>
+        </body>
+    </body>
+</html>

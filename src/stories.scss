@@ -1,0 +1,262 @@
+@font-face 
+  font-family: "CustomRoboto"
+  src: url("assets/fonts/Roboto-Regular.ttf") format('truetype')
+  font-weight: 400
+
+@font-face 
+  font-family: "CustomRoboto"
+  src: url("assets/fonts/Roboto-Bold.ttf") format('truetype')
+  font-weight: 700
+
+@font-face 
+  font-family: "CustomRoboto"
+  src: url("assets/fonts/Roboto-Medium.ttf") format('truetype')
+  font-weight: 500;
+
+
+$no-margin-collapse: 0.05px;
+$themes: (
+  "light": (
+    "colors": (
+      "color-primary": #261C00,
+      "color-secondary": #BFBFBF,
+    ),
+    "backgrounds": (
+      "bg-primary": "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%)",
+      "bg-secondary": "linear-gradient(180deg, rgba(244, 244, 244, 0.9) 0.82%, #E9E9E9 100%, rgba(234, 234, 234, 0) 100%)",
+      "bg": #FFFFFF,
+    ),
+    "shadows": (
+      "shadow-primary": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 176, 57, 0.8)",
+      "shadow-secondary": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(207, 207, 207, 0.5)",
+    ),
+    "filters": (
+      "filter-image": '',
+    )
+  ),
+  "dark": (
+    "colors": (
+      "color-primary": #FCFBF7,
+      "color-secondary": #918F8A,
+    ),
+    "backgrounds": (
+      "bg-primary": "radial-gradient(91.67% 122.17% at 69.17% -11.17%, #FFA300 0%, #2D1C00 100%)",
+      "bg-secondary": "linear-gradient(180deg, rgba(0, 0, 0, 0) -2.22%, rgba(0, 0, 0, 0.8) 100%), radial-gradient(149.08% 95.38% at 38.75% 71.48%, #000000 0%, #231900 0.01%, #4D4D4D 100%)",
+      "bg": "radial-gradient(circle at 50% 50%, #120C01 0%, #000000 100%)",
+    ),
+    "shadows": (
+      "shadow-primary": "inset -1px 1px 1px rgba(255, 255, 255, 0.4), inset 0px 6px 15px rgba(255, 162, 0, 0.4)",
+      "shadow-secondary": "inset -1px 1px 1px rgba(255, 255, 255, 0.2), inset 2px 2px 16px rgba(103, 103, 103, 0.6)",
+    ),
+    "filters": (
+      "filter-image": grayscale(100%),
+    )
+  )
+);
+
+@each $theme-name, $theme-vars in $themes {
+  $shadows: map-get($theme-vars, "shadows");
+  $backgrounds: map-get($theme-vars, "backgrounds");
+  $colors: map-get($theme-vars, "colors");
+  $filters: map-get($theme-vars, "filters");
+
+  body.theme_#{$theme-name} {
+    
+    // define a css variable for each color
+    @each $name, $color in $colors {
+      --#{$name}: #{$color};
+    }
+
+    // define a css variable for each theme color
+    @each $name, $color in $backgrounds {
+      --#{$name}: #{$color};
+    }
+
+    // define a css variable for each shadow
+    @each $name, $shadow in $shadows {
+      --#{$name}: #{$shadow};
+    }
+
+    // define a css variable for each filter
+    @each $name, $filter in $filters {
+      --#{$name}: #{$filter};
+    }    
+  }
+}
+
+
+/* -----=== Checking orientation ===----- */
+@mixin orientation($direction) { 
+
+  $orientation-landscape: "(orientation:landscape)"; 
+  $orientation-portrait: "(orientation:portrait)";
+
+  @if $direction == landscape {
+    @media #{$orientation-landscape} { @content; } 
+  }
+  @if $direction == portrait {
+    @media #{$orientation-portrait} { @content; } 
+  }
+} 
+
+/* -----=== Checking device screen size ===----- */
+@mixin zoom($value, $width) { 
+  @media #{$width} { 
+     zoom: $value; 
+    -moz-transform: scale($value); 
+    -moz-transform-origin: 0 0;
+   }
+}
+
+* {
+  margin: 0;
+}
+
+body {
+    background: var(--bg);
+}
+
+.slide {
+  font-family: "CustomRoboto", sans-serif;
+  letter-spacing: 0px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0 20px;
+  height: 100%;
+  box-sizing: border-box; /* In case to disable window stretching by padding */
+
+  @include orientation(landscape) {
+    /*background-color: black;*/
+  }
+
+  @include zoom(2,    "(min-width: 1920px)");
+  @include zoom(1.5,  "(min-width: 1366px) and (max-width: 1920px)");
+  @include zoom(1.25, "(min-width: 1024px) and (max-width: 1366px)");
+  @include zoom(1,    "(min-width: 320px) and (max-width: 1024)");
+  @include zoom(0.85, "(max-width: 320px)")
+
+  // REALIZE BOTH ORIENTATIONS
+}
+
+.headline {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 32px;
+  }
+
+.subhead {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+.text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+.caption {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+.avatar {
+  border-radius: 100px;
+}
+
+.leaders {
+
+  &__title {
+    color: var(--color-primary);
+    @include orientation(landscape) { text-align: center; }
+   }
+
+  &__subtitle {
+    margin-top: 8px;
+    color: var(--color-secondary);
+    @include orientation(landscape) { text-align: center; }
+  }
+}
+
+.podium {
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  flex-grow: 1;
+
+  margin-top: 233;
+  @include orientation(landscape) { margin-top: 190; }
+
+  &__user-card {
+    margin-top: -160px;
+  }
+
+  &__place-number {
+    margin-top: 16px; 
+    color: var(--color-primary);   
+  }
+
+  &__step {
+    min-width: max-content;
+    border-radius: 6px 6px 0 0;
+    
+    &_position_left {
+      margin-right: -16px;
+      padding-right: 16px;
+    }
+
+    &_position_right {
+      margin-left: -16px;
+      padding-left: 16px;
+    }
+
+    &_position_center {
+      padding: 0 8px;
+    }
+
+    &_background_primary {
+      background: var(--bg-primary);
+      box-shadow: var(--shadow-primary);
+    }
+
+    &_background_secondary {
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-secondary);
+    }
+  }
+}
+
+.user-card {
+  width: 104px;
+  text-align: center;
+  position: relative;
+  padding: $no-margin-collapse;
+
+  &__avatar {
+    display: block;
+    margin: 20px auto 0 auto;
+    filter: var(--filter-image);
+  }
+
+  &__name {
+    margin: 4px 6px;
+    color: var(--color-primary);
+  }
+
+  &__caption {
+    margin-bottom: 16px;
+    color: var(--color-secondary);
+  }
+
+  &__emoji {
+    font-size: 32px;
+    position: absolute;
+    transform: translate(0, 50%);
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: -22px;
+  }
+}
