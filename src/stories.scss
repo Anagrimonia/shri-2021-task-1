@@ -197,6 +197,7 @@ body {
   &__name {
     margin: 6px 4px;
     height: 36px;
+    color: var(--color-primary);
   }
 
   &__caption {
@@ -205,6 +206,7 @@ body {
   }
 
   &__emoji {
+    z-index: 1;
     font-size: 32px;
     position: absolute;
     transform: translate(0, 50%);

@@ -69,8 +69,8 @@ export default class LeadersPage {
                 emoji: '👍' });
 
             // If extra winner is on the podium
-            if (extraIndex < num) 
-                winners[extraIndex] = { winner: extra, place: extraIndex };
+            if (extraIndex > 0 && extraIndex < num) 
+                winners[extraIndex].winner.emoji = '👍';
             
             // If orientation is horizontal & selected user not in first four winners
             else if (this.orientation == 'horizontal' && extraIndex >= 4)
