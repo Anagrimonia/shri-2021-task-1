@@ -13,6 +13,27 @@
   src: url("assets/fonts/Roboto-Medium.ttf") format('truetype')
   font-weight: 500;
 
+$landscape: 'orientation: landscape';
+$portrait: 'orientation: portrait';
+
+$devices: (
+  'portrait': (
+    'mobile-s': '320px',
+    'mobile-m': '376px',
+    'mobile-l': '414px',
+    'tablet':   '768px',
+    'laptop':   '1024px',
+    'laptop-l': '1080px'
+    ),
+  'landscape': (
+    'mobile-s': '568px',
+    'mobile-m': '668px',
+    'mobile-l': '736px',
+    'tablet':   '1024px',
+    'laptop':   '1366px',
+    'laptop-l': '1920px'
+  )
+);
 
 $no-margin-collapse: 0.05px;
 $themes: (
@@ -85,27 +106,21 @@ $themes: (
 }
 
 
-/* -----=== Checking orientation ===----- */
-@mixin orientation($direction) { 
-
-  $orientation-landscape: "(orientation:landscape)"; 
-  $orientation-portrait: "(orientation:portrait)";
-
-  @if $direction == landscape {
-    @media #{$orientation-landscape} { @content; } 
-  }
-  @if $direction == portrait {
-    @media #{$orientation-portrait} { @content; } 
-  }
-} 
-
-/* -----=== Checking device screen size ===----- */
-@mixin zoom($value, $width) { 
-  @media #{$width} { 
-     zoom: $value; 
+@mixin zoom($value, $direction: top) {
+    transform: scale($value); 
+    transform-origin: $direction; 
     -moz-transform: scale($value); 
-    -moz-transform-origin: 0 0;
-   }
+    -moz-transform-origin: $direction;
+}
+
+/* -----=== Adaptive design mixin ===----- */
+@mixin adapt($orientation, $media: '(":")') {
+  @if $orientation == landscape {
+    @media ($landscape) and #{$media} { @content; }
+  }
+  @if $orientation == portrait {
+    @media ($portrait) and #{$media} { @content; }
+  }
 }
 
 * {
@@ -140,18 +155,13 @@ body {
   padding: 20px 20px 0 20px;
   height: 100%;
   box-sizing: border-box; /* In case to disable window stretching by padding */
+}
 
-  @include orientation(landscape) {
-    /*background-color: black;*/
-  }
-
-  @include zoom(2,    "(min-width: 1920px)");
-  @include zoom(1.5,  "(min-width: 1366px) and (max-width: 1920px)");
-  @include zoom(1.25, "(min-width: 1024px) and (max-width: 1366px)");
-  @include zoom(1,    "(min-width: 320px) and (max-width: 1024)");
-  @include zoom(0.85, "(max-width: 320px)")
-
-  // REALIZE BOTH ORIENTATIONS
+.content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .headline {
@@ -234,10 +244,9 @@ body {
   justify-content: center;
   display: flex;
   text-align: center;
-  flex-grow: 1;
 
-  margin-top: 233;
-  @include orientation(landscape) { margin-top: 190; }
+  height: 325px;
+  @include adapt(landscape) { height: 108px; }
 
   &__user-card {
     margin-top: -160px;
@@ -289,16 +298,16 @@ body {
   }
 }
 
-.leaders {
+.header {
 
   &__title {
     color: var(--color-primary);
-    @include orientation(landscape) { text-align: center; }
+    @include adapt(landscape) { text-align: center; }
    }
 
   &__subtitle {
     margin-top: 8px;
     color: var(--color-secondary);
-    @include orientation(landscape) { text-align: center; }
+    @include adapt(landscape) { text-align: center; }
   }
 }

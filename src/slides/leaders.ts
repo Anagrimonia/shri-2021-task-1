@@ -2,6 +2,8 @@ import type { User } from '../types/user' ;
 import type { Orientation } from '../types/orientation';
 import UserCard from '../components/UserCard'
 import Podium from '../components/Podium'
+import Header from '../components/Header';
+
 
 export default class LeadersPage {
     private data : {
@@ -31,17 +33,16 @@ export default class LeadersPage {
         const container = document.createElement('div');
         container.classList.add('slide', 'leaders');
 
-        // Headline
-        const title = document.createElement('h2');
-        title.classList.add('headline', 'leaders__title');
-        title.innerText += this.data.title;
-        container.appendChild(title);
+        const header = new Header({ 
+            title: this.data.title as string, 
+            subtitle: this.data.subtitle as string }).render();
 
-        // Subhead
-        const subtitle = document.createElement('h3');
-        subtitle.classList.add('text', 'leaders__subtitle');
-        subtitle.innerText += this.data.subtitle;
-        container.appendChild(subtitle);
+        container.append(header);
+
+        // Content block
+        const content = document.createElement('div');
+        content.classList.add('content');
+        container.append(content);
 
         // Defining a number of podium places according to orientation
         const num = this.orientation === 'vertical' ? 3 : 5;
@@ -85,7 +86,7 @@ export default class LeadersPage {
                 winners : winners, 
                 orientation: this.orientation}).render();
 
-        container.append(podium);
+        content.append(podium);
 
         return container as HTMLElement;
         

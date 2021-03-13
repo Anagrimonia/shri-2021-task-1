@@ -9,8 +9,8 @@ import LeadersPage from './slides/leaders';
 
 function renderTemplate(alias: String, data: any) {
     
-    window.onresize = refresh;
-    window.onload = refresh;
+    window.onresize = resize;
+    window.onload = resize;
 
     var alias = alias;
     var data = data;
@@ -20,7 +20,7 @@ function renderTemplate(alias: String, data: any) {
         return (window.innerWidth > window.innerHeight) ? 'horizontal' : 'vertical'
     }
 
-    function refresh() {
+    function resize() {
         var current : Orientation = checkOrientation();
         if (orientation != current) {
             orientation = current;
