@@ -42,14 +42,14 @@ export default class UserCard {
         
         // Name
         const name = document.createElement('p');
-        name.classList.add('user-card__name', 'text');
+        name.classList.add('user-card__name', 'text', 'text_truncation');
         name.innerText += this.user.name;
         userCard.appendChild(name);
 
         // Caption
         if (this.caption) {
             const caption = document.createElement('p');
-            caption.classList.add('user-card__caption', 'caption');
+            caption.classList.add('user-card__caption', 'caption', 'text_truncation');
             caption.innerText += this.user.valueText;   
             userCard.appendChild(caption);
         }

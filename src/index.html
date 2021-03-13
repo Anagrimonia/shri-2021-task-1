@@ -13,18 +13,19 @@
                 var data = {
                     "alias": "leaders",
                     "data": {
-                      "title": "Больше всего коммитов",
+                      "title": "Самый большой коммит",
                       "subtitle": "Спринт № 213",
-                      "emoji": "👑",
+                      "emoji": "😮",
+                      "selectedUserId": 4,
                       "users": [
-                        {"id": 3, "name": "Дарья Ковалева", "avatar": "3.jpg", "valueText": "32"},
-                        {"id": 9, "name": "Сергей Бережной", "avatar": "9.jpg", "valueText": "27"},
-                        {"id": 7, "name": "Дмитрий Андриянов", "avatar": "7.jpg", "valueText": "22"},
-                        {"id": 6, "name": "Андрей Мокроусов", "avatar": "6.jpg", "valueText": "20"},
-                        {"id": 8, "name": "Александр Иванков", "avatar": "8.jpg", "valueText": "19"}
+                        {"id": 12, "name": "Алексей Ярошевич", "avatar": "12.jpg", "valueText": "4001 строка"},
+                        {"id": 5, "name": "Александр Николаичев", "avatar": "5.jpg", "valueText": "3845 строк"},
+                        {"id": 8, "name": "Александр Иванков", "avatar": "8.jpg", "valueText": "3640 строк"},
+                        {"id": 10, "name": "Яна Берникова", "avatar": "10.jpg", "valueText": "3453 строки"},
+                        {"id": 4, "name": "Вадим Пацев", "avatar": "4.jpg", "valueText": "2852 строки"}
                       ]
                     }
-                };
+                  };
 
                 const body = document.querySelector('body');
                 body.innerHTML = window.renderTemplate(data.alias, data.data);

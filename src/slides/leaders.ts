@@ -1,18 +1,26 @@
 import type { User } from '../types/user' ;
 import type { Orientation } from '../types/orientation';
 import UserCard from '../components/UserCard'
+import Podium from '../components/Podium'
 
 export default class LeadersPage {
     private data : {
         title: String, 
         subtitle: String, 
         emoji: String, 
-        users: Array<User>
+        selectedUserId?: number,
+        users: Array<User>,
     };
     private orientation: Orientation;
 
-    constructor (data: { title: String, subtitle: String, emoji: String, users: Array<User> }, 
-                 orientation: Orientation) { 
+    constructor (data: { 
+        title: String, 
+        subtitle: String, 
+        emoji: String, 
+        selectedUserId?: 
+        number, users: Array<User> 
+    },  orientation: Orientation) { 
+        
         this.data = data;
         this.orientation = orientation;
     }
@@ -35,54 +43,49 @@ export default class LeadersPage {
         subtitle.innerText += this.data.subtitle;
         container.appendChild(subtitle);
 
-        // Podium
-        const podium = document.createElement('div');
-        podium.classList.add('podium');
-        container.appendChild(podium);
+        // Defining a number of podium places according to orientation
+        const num = this.orientation === 'vertical' ? 3 : 5;
 
-        // Checking orientation
-        var num = this.orientation === 'vertical' ? 3 : 5;
-        const margin : { [key: string]: string[] } = { '3': ['0', '15', '30'], '5': ['0', '3', '3', '6', '6'] }
+        var winners : { winner: UserCard, place: number }[] = []; 
 
-        for (let i = 0; i < num; i++) {
-            
-            // Step
-            const step = document.createElement('div');
-            step.classList.add(`podium__step`);
-            step.style.zIndex = String(num - i);
-            step.style.marginTop = margin[num][i] + '%';
+        for (let i = 0; i < num; i++) { 
 
-            // Adding places backgrounds
-            if (i == 0)
-                step.classList.add(`podium__step_background_primary`);
-            else 
-                step.classList.add(`podium__step_background_secondary`);
-
-            // Sorting places positions on podium (ex: 3-1-2, 5-3-1-2-4)
-            if (i % 2 == 0) {
-                step.classList.add(`podium__step_position_${i == 0 ? 'center' : 'left' }`);
-                podium.prepend(step);
-            }
-            else {
-                step.classList.add(`podium__step_position_right`);
-                podium.append(step);
-            }
-
-            // Winner
             const user = new UserCard({ 
                 user : this.data.users[i] as User, 
-                caption: true, 
-                emoji: i == 0 ? this.data.emoji as string : undefined }).render();
+                caption: true,
+                emoji: i == 0 ? this.data.emoji as string : undefined });
 
-            user.classList.add(`podium__user-card`);
-            step.append(user);
-
-            // Place number
-            const placeNumber = document.createElement('p');
-            placeNumber.classList.add('headline', 'podium__place-number');
-            placeNumber.innerText = String(i + 1);
-            step.append(placeNumber);            
+            winners.push({ winner: user, place: i });
         }
+
+        // If an extra winner exists
+        if (this.data.selectedUserId) {
+
+            const extraIndex : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId);
+            
+            const extra = new UserCard({ 
+                user : this.data.users[extraIndex] as User, 
+                caption: true, 
+                emoji: '👍' });
+
+            // If extra winner is on the podium
+            if (extraIndex < num) 
+                winners[extraIndex] = { winner: extra, place: extraIndex };
+            
+            // If orientation is horizontal & selected user not in first four winners
+            else if (this.orientation == 'horizontal' && extraIndex >= 4)
+                winners[winners.length - 1] = { winner: extra, place: extraIndex };                
+            
+            // If orientation is vertical & selected user not in winners
+            else if (this.orientation == 'vertical' && extraIndex >= 3)
+                winners.push({ winner: extra, place: extraIndex });
+        }
+
+        const podium = new Podium({ 
+                winners : winners, 
+                orientation: this.orientation}).render();
+
+        container.append(podium);
 
         return container as HTMLElement;
         
