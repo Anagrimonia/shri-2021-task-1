@@ -31,18 +31,7 @@ export default class LeadersPage {
 
         // Base container
         const container = document.createElement('div');
-        container.classList.add('slide', 'leaders');
-
-        const header = new Header({ 
-            title: this.data.title as string, 
-            subtitle: this.data.subtitle as string }).render();
-
-        container.append(header);
-
-        // Content block
-        const content = document.createElement('div');
-        content.classList.add('content');
-        container.append(content);
+        container.classList.add('leaders');
 
         // Defining a number of podium places according to orientation
         const num = this.orientation === 'vertical' ? 3 : 5;
@@ -86,7 +75,7 @@ export default class LeadersPage {
                 winners : winners, 
                 orientation: this.orientation}).render();
 
-        content.append(podium);
+        container.append(podium);
 
         return container as HTMLElement;
         

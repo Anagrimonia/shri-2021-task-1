@@ -1,7 +1,7 @@
 import 'normalize.css';
 import './stories.scss';
 
-
+import Header from './components/Header';
 import type { Orientation } from './types/orientation';
 import LeadersPage from './slides/leaders';
 import VotePage from './slides/vote';
@@ -31,14 +31,32 @@ function renderTemplate(alias: String, data: any) {
     };
 
     function render() : string {
-      switch (alias) {
-        case "leaders":  return new LeadersPage(data, orientation).render().outerHTML;
-        case "vote":     return new VotePage(data, orientation).render().outerHTML;
-        //case "chart":    return new LeadersPage(data).render().outerHTML;
-        //case "diagram":  return new LeadersPage(data).render().outerHTML;
-        //case "activity": return new LeadersPage(data).render().outerHTML;
-        default:         return '';
-      }
+
+        // Base container
+        const container = document.createElement('div');
+        container.classList.add('slide');
+
+        const header = new Header({ 
+            title: data.title as string, 
+            subtitle: data.subtitle as string }).render();
+
+        container.append(header);
+
+        // Content block
+        const content = document.createElement('div');
+        content.classList.add('content');
+        container.append(content);
+
+          switch (alias) {
+            case "leaders":    content.append(new LeadersPage(data, orientation).render()); break;
+            case "vote":       content.append(new VotePage(data, orientation).render());    break;
+            //case "chart":    content.append(new LeadersPage(data).render());
+            //case "diagram":  content.append(new LeadersPage(data).render().outerHTML;
+            //case "activity": content.append(new LeadersPage(data).render().outerHTML;
+            default:           '';
+          }
+
+          return container.outerHTML;
     }
 
     return render();
