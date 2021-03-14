@@ -1,8 +1,10 @@
 import 'normalize.css';
+import './stories.scss';
+
 
 import type { Orientation } from './types/orientation';
 import LeadersPage from './slides/leaders';
-//import VotePage from './slides/leaders';
+import VotePage from './slides/vote';
 //import ChartPage from './slides/leaders';
 //import DiagramPage from './slides/leaders';
 //import ActivityPage from './slides/leaders';
@@ -17,7 +19,7 @@ function renderTemplate(alias: String, data: any) {
     var orientation : Orientation = checkOrientation();
 
     function checkOrientation() : Orientation {
-        return (window.innerWidth > window.innerHeight) ? 'horizontal' : 'vertical'
+        return (window.innerWidth > window.innerHeight) ? 'horizontal' : 'vertical';
     }
 
     function resize() {
@@ -31,7 +33,7 @@ function renderTemplate(alias: String, data: any) {
     function render() : string {
       switch (alias) {
         case "leaders":  return new LeadersPage(data, orientation).render().outerHTML;
-        //case "vote":     return new LeadersPage(data).render().outerHTML;
+        case "vote":     return new VotePage(data, orientation).render().outerHTML;
         //case "chart":    return new LeadersPage(data).render().outerHTML;
         //case "diagram":  return new LeadersPage(data).render().outerHTML;
         //case "activity": return new LeadersPage(data).render().outerHTML;
