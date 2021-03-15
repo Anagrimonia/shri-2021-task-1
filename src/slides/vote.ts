@@ -6,6 +6,9 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 
 export default class VotePage {
+    
+    private orientation: Orientation;
+
     private data : {
         title: String, 
         subtitle: String, 
@@ -15,11 +18,16 @@ export default class VotePage {
         users: Array<User>,
     };
 
-    private orientation: Orientation;
     private chunk: number;
-    private gridItems: HTMLDivElement[] = [];
-    private buttonUp: HTMLElement;
-    private buttonDown: HTMLElement;
+    private columns: HTMLDivElement[] = [];
+
+    private grid = { 
+        "vertical":   { order: [0, 1, 2, 0, 1, 2, 0, 2], num: 8, cols: 3 }, 
+        "horizontal": { order: [0, 1, 3, 4, 1, 3], num: 6, cols: 5 }
+    };
+
+    private buttonUp : HTMLElement;
+    private buttonDown : HTMLElement;
 
     constructor (data: { 
         title: String, 
@@ -36,6 +44,22 @@ export default class VotePage {
 
         this.buttonUp = new Button({ direction: 'up' }).render();
         this.buttonDown = new Button({ direction: 'down' }).render();
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(() => {
+
+            this.buttonUp = (document.getElementsByClassName('button_direction_up')[0] as HTMLButtonElement);
+            this.buttonUp.removeEventListener('click', this._pageUp.bind(this), true);
+            this.buttonUp.addEventListener('click', this._pageUp.bind(this), true);
+            
+            this.buttonDown = (document.getElementsByClassName('button_direction_down')[0] as HTMLButtonElement);
+            this.buttonDown.removeEventListener('click', this._pageDown.bind(this), true);
+            this.buttonDown.addEventListener('click', this._pageDown.bind(this), true);
+
+            this.columns = Array.from(document.getElementsByClassName('user-grid__column')) as HTMLDivElement[];
+        });
+
+        observer.observe(document.querySelector('body') as Node, { childList: true });
     }
 
     render() {
@@ -44,49 +68,39 @@ export default class VotePage {
         const container = document.createElement('div');
         container.classList.add('user-grid');
 
-        // Defining a number of users per page
-        const num : number = (this.orientation === 'horizontal') ? 6 : 8;
-        
-        // Button Up
-        const itemButtonUp = document.createElement('div');
-        itemButtonUp.classList.add('user-grid__button-up');
-        container.append(itemButtonUp);
-        itemButtonUp.append(this.buttonUp);
-        
-        // Content down
-        const itemButtonDown = document.createElement('div');
-        itemButtonDown.classList.add('user-grid__button-down');
-        container.append(itemButtonDown);
-        itemButtonDown.append(this.buttonDown);
+        this.buttonUp.classList.add('user-grid__button-up');
+        this.buttonDown.classList.add('user-grid__button-down');
 
-        for (var i = 0; i < num; i++) {
+        const { order, num, cols } = this.grid[this.orientation];
+
+        for (var i = 0; i < cols; i++) {
             
-            // Grid item
-            const item = document.createElement('div');
-            item.classList.add('user-grid__item');
-            container.append(item);
-            this.gridItems.push(item);
+            const column = document.createElement('div');
+            column.style.order = String(i + 1);
+            column.classList.add('user-grid__column');
+            container.append(column);
+            this.columns.push(column);
+
+            if (i + 1 == Math.ceil(cols / 2)) {
+                column.append(this.buttonUp);
+                column.append(this.buttonDown);
+            }
         }
 
         this._showPage(num);
 
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(() => {
-            this.buttonUp = (document.getElementsByClassName('button_direction_up')[0] as HTMLButtonElement);
-            this.buttonUp.addEventListener('click', () => this._turnPage(-num));
-            
-            this.buttonDown = (document.getElementsByClassName('button_direction_down')[0] as HTMLButtonElement);
-            this.buttonDown.addEventListener('click', () => this._turnPage(num));
-
-            this.gridItems = Array.from(document.getElementsByClassName('user-grid__item')) as HTMLDivElement[];
-        });
-
-        observer.observe(document.querySelector('body') as Node, { childList: true });
-
         return container as HTMLElement;
     }  
 
-    private _turnPage(num : number) {
+
+    private _pageUp() {
+        var num = this.grid[this.orientation].num;
+        this.chunk -= num;
+        this._showPage(-num);
+    }
+
+    private _pageDown() {
+        var num = this.grid[this.orientation].num;
         this.chunk += num;
         this._showPage(num);
     }
@@ -98,13 +112,28 @@ export default class VotePage {
         // Getting a batch        
         const users = this.data.users.slice(this.chunk, this.chunk + Math.abs(num));
         
-        // Clearing grid cells
-        this.gridItems.map((item) => item.innerHTML = "");
+        // Clearing column items
+        this.columns.map((column) => {
+            let item = column.querySelector('.user-card');
+            while (item) {
+                column.removeChild(item);
+                item = column.querySelector('.user-card');
+            }
+        });
 
         // Adding users of the current batch
-        for (var i = 0; i < users.length; i++) {
-            const user = new UserCard({ user : users[i] as User }).render();
-            this.gridItems[i].append(user);
+        for (var i = 0; i < Math.abs(num); i++) {
+
+            var user : HTMLElement;
+
+            if (i < users.length)
+                 user = new UserCard({ user : users[i] as User }).render();
+             else {
+                user = document.createElement('div');
+                user.classList.add('user-card');
+                user.style.height = '142px';
+             }
+            this.columns[this.grid[this.orientation].order[i]].append(user);
         }
     }
 
@@ -120,5 +149,11 @@ export default class VotePage {
         else 
            this.buttonDown.classList.remove('button_disabled');
         
+    }
+
+    setOrientation(orientation : Orientation) {
+        this.orientation = orientation;
+        this.chunk = 0;
+        this.columns = [];
     }
 }

@@ -18,6 +18,18 @@ function renderTemplate(alias: String, data: any) {
     var data = data;
     var orientation : Orientation = checkOrientation();
 
+    var page : any;
+
+    switch (alias) {
+        case "leaders":    page = new LeadersPage(data, orientation); break;
+        case "vote":       page = new VotePage(data, orientation);    break;
+        //case "chart":    page = new LeadersPage(data).render());
+        //case "diagram":  page = new LeadersPage(data).render().outerHTML;
+        //case "activity": page = new LeadersPage(data).render().outerHTML;
+        default:           '';
+    }
+
+
     function checkOrientation() : Orientation {
         return (window.innerWidth > window.innerHeight) ? 'horizontal' : 'vertical';
     }
@@ -26,6 +38,7 @@ function renderTemplate(alias: String, data: any) {
         var current : Orientation = checkOrientation();
         if (orientation != current) {
             orientation = current;
+            page.setOrientation(current);
             document.body.innerHTML = render();
         }
     };
@@ -47,16 +60,9 @@ function renderTemplate(alias: String, data: any) {
         content.classList.add('content');
         container.append(content);
 
-          switch (alias) {
-            case "leaders":    content.append(new LeadersPage(data, orientation).render()); break;
-            case "vote":       content.append(new VotePage(data, orientation).render());    break;
-            //case "chart":    content.append(new LeadersPage(data).render());
-            //case "diagram":  content.append(new LeadersPage(data).render().outerHTML;
-            //case "activity": content.append(new LeadersPage(data).render().outerHTML;
-            default:           '';
-          }
+        content.append(page.render());
 
-          return container.outerHTML;
+         return container.outerHTML;
     }
 
     return render();

@@ -6,6 +6,8 @@ import Header from '../components/Header';
 
 
 export default class LeadersPage {
+    
+    private orientation: Orientation;
     private data : {
         title: String, 
         subtitle: String, 
@@ -13,7 +15,6 @@ export default class LeadersPage {
         selectedUserId?: number,
         users: Array<User>,
     };
-    private orientation: Orientation;
 
     constructor (data: { 
         title: String, 
@@ -79,6 +80,10 @@ export default class LeadersPage {
 
         return container as HTMLElement;
         
+    }
+
+    setOrientation(orientation : Orientation) {
+        this.orientation = orientation;
     }
 
 }
