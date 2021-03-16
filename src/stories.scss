@@ -139,8 +139,10 @@ body {
     background: var(--bg);
 }
 
-li {
-  list-style-type: none;
+button {
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 /* MODIFICATORS  */
@@ -157,6 +159,16 @@ li {
 
 .color_secondary {
   color: var(--color-secondary);
+}
+
+ .background_primary {
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.background_secondary {
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-secondary);
 }
 
 .slide {
@@ -210,6 +222,8 @@ li {
   position: relative;
   padding: $no-margin-collapse;
   padding-bottom: 16px;
+  border-radius: 6px;
+  display: block;
 
   &__avatar {
     display: block;
@@ -237,6 +251,12 @@ li {
     right: 0;
     top: -22px;
   }
+
+  &_hoverable {
+    &:hover  { @extend .background_secondary; }
+  }
+
+  &_active { @extend .background_primary; }
 }
 
 @mixin user-card_style($name-color, $caption-color) {
@@ -295,17 +315,6 @@ li {
       position: absolute;
       bottom: 16px;
       @include user-card_style(var(--color-primary), var(--color-primary));
-
-    }
-
-    &_background_primary {
-      background: var(--bg-primary);
-      box-shadow: var(--shadow-primary);
-    }
-
-    &_background_secondary {
-      background: var(--bg-secondary);
-      box-shadow: var(--shadow-secondary);
     }
   }
 }
@@ -347,8 +356,7 @@ li {
   &_direction_down { }
 }
 
-.user-grid {
-  
+.user-grid {  
   display: grid;
   justify-items: center;
   margin: 0 24px;

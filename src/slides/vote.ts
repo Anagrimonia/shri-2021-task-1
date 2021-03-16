@@ -1,9 +1,9 @@
 import type { User } from '../types/user' ;
 import type { Orientation } from '../types/orientation';
 
-import UserCard from '../components/UserCard'
-import Header from '../components/Header';
-import Button from '../components/Button';
+import UserCard from '../templates/UserCard'
+import Header from '../templates/Header';
+import Button from '../templates/Button';
 
 export default class VotePage {
     
@@ -19,15 +19,15 @@ export default class VotePage {
     };
 
     private chunk: number;
-    private columns: HTMLDivElement[] = [];
-
     private grid = { 
         "vertical":   { order: [0, 1, 2, 0, 1, 2, 0, 2], num: 8, cols: 3 }, 
-        "horizontal": { order: [0, 1, 3, 4, 1, 3], num: 6, cols: 5 }
+        "horizontal": { order: [0, 1, 3, 4, 1, 3],       num: 6, cols: 5 }
     };
 
-    private buttonUp : HTMLElement;
-    private buttonDown : HTMLElement;
+    private buttonUp : Button;
+    private buttonDown : Button;
+
+    private columns: HTMLDivElement[] = [];
 
     constructor (data: { 
         title: String, 
@@ -42,24 +42,37 @@ export default class VotePage {
         this.orientation = orientation;
         this.chunk = 0;
 
-        this.buttonUp = new Button({ direction: 'up' }).render();
-        this.buttonDown = new Button({ direction: 'down' }).render();
+        this.buttonUp = new Button().render({ direction: 'up' });
+        this.buttonDown = new Button().render({ direction: 'down' });
 
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(() => {
+        // -----=== ORIENTATION OBSERVER ===-----
+        // [ Triggered if orientation has changed ]
+        const orientationObserver = new MutationObserver(() => {
 
-            this.buttonUp = (document.getElementsByClassName('button_direction_up')[0] as HTMLButtonElement);
-            this.buttonUp.removeEventListener('click', this._pageUp.bind(this), true);
-            this.buttonUp.addEventListener('click', this._pageUp.bind(this), true);
+            this._pageUp = this._pageUp.bind(this);
+            this._pageDown = this._pageDown.bind(this);            
+
+            this.buttonUp = (document.getElementsByClassName('button_direction_up')[0] as Button);
+            this.buttonUp.removeEventListener('click', this._pageUp, true);
+            this.buttonUp.addEventListener('click', this._pageUp, true);
             
-            this.buttonDown = (document.getElementsByClassName('button_direction_down')[0] as HTMLButtonElement);
-            this.buttonDown.removeEventListener('click', this._pageDown.bind(this), true);
-            this.buttonDown.addEventListener('click', this._pageDown.bind(this), true);
+            this.buttonDown = (document.getElementsByClassName('button_direction_down')[0] as Button);
+            this.buttonDown.removeEventListener('click', this._pageDown, true);
+            this.buttonDown.addEventListener('click', this._pageDown, true);
 
             this.columns = Array.from(document.getElementsByClassName('user-grid__column')) as HTMLDivElement[];
+
+            this._resetUserSelection();
+            gridUpdateObserver.observe(document.querySelector('.user-grid__column') as Node, { childList: true });
+
         });
 
-        observer.observe(document.querySelector('body') as Node, { childList: true });
+         // -----=== GRID UPDATE OBSERVER ===-----
+        // [ Triggered if page has turned ]
+        const gridUpdateObserver = new MutationObserver(this._resetUserSelection.bind(this)); 
+        
+
+        orientationObserver.observe(document.querySelector('body') as Node, { childList: true });
     }
 
     render() {
@@ -114,10 +127,9 @@ export default class VotePage {
         
         // Clearing column items
         this.columns.map((column) => {
-            let item = column.querySelector('.user-card');
-            while (item) {
-                column.removeChild(item);
-                item = column.querySelector('.user-card');
+            let items = column.getElementsByClassName("user-card");
+            while (items.length) {
+                column.removeChild(items[0]);
             }
         });
 
@@ -127,7 +139,7 @@ export default class VotePage {
             var user : HTMLElement;
 
             if (i < users.length)
-                 user = new UserCard({ user : users[i] as User }).render();
+                 user = new UserCard().render({ user : users[i] as User, hoverable: true });
              else {
                 user = document.createElement('div');
                 user.classList.add('user-card');
@@ -138,17 +150,18 @@ export default class VotePage {
     }
 
     private _checkEdges(num : number) {             
-        if (this.chunk === 0) 
-           this.buttonUp.classList.add('button_disabled');
-        else 
-           this.buttonUp.classList.remove('button_disabled');
+         this.buttonUp.disabled(this.chunk === 0);
+         this.buttonDown.disabled(this.chunk + num >= this.data.users.length);        
+    }
 
-
-        if (this.chunk + num >= this.data.users.length) 
-           this.buttonDown.classList.add('button_disabled');
-        else 
-           this.buttonDown.classList.remove('button_disabled');
-        
+    private _resetUserSelection() {
+        var users : HTMLElement[];
+        users = Array.from(document.querySelectorAll('.user-card'));
+        users.map((user) => user.addEventListener('click', () => {
+            (user as UserCard).active(true);
+            console.log(this.data, UserCard);
+            (user as UserCard).setEmoji('👍' as string);
+        })); 
     }
 
     setOrientation(orientation : Orientation) {

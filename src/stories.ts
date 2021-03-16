@@ -1,7 +1,7 @@
 import 'normalize.css';
 import './stories.scss';
 
-import Header from './components/Header';
+import Header from './templates/Header';
 import type { Orientation } from './types/orientation';
 import LeadersPage from './slides/leaders';
 import VotePage from './slides/vote';
