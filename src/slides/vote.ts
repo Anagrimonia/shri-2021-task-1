@@ -38,18 +38,36 @@ export default class VotePage {
 
     render() {
 
+        const { order, num, cols } = this.grid[this.orientation];
+        const offset = this.data.offset || 0;
+
         // Content block
         const container = document.createElement('div');
         container.classList.add('user-grid');
 
         const buttonUp = new Button().render({ direction: 'up' });
         buttonUp.classList.add('user-grid__button-up');
+        buttonUp.dataset.action = 'update';
+        buttonUp.dataset.params = JSON.stringify({
+            alias: 'vote',  
+            data: {
+                offset: (offset - num > 0) ? offset - num : 0          
+            }
+        });
 
         const buttonDown = new Button().render({ direction: 'down' });
         buttonDown.classList.add('user-grid__button-down');
-
-        const { order, num, cols } = this.grid[this.orientation];
-
+        buttonDown.dataset.action = 'update';
+        buttonDown.dataset.params = JSON.stringify({
+            alias: 'vote',  
+            data: {
+                offset: (offset + num < this.data.users.length) ? offset + num : 0          
+            }
+        });
+     
+        buttonUp.disabled(offset == 0);
+        buttonDown.disabled(offset + num >= this.data.users.length);        
+    
         var columns : HTMLElement[] = []
 
         for (var i = 0; i < cols; i++) {
@@ -67,7 +85,7 @@ export default class VotePage {
         }
 
         // Getting a batch        
-        const users = this.data.users.slice(this.data.offset || 0, num).map(user => {
+        const users = this.data.users.slice(offset, num).map(user => {
             return new UserCard().render({ user: user, hoverable: true });
         });
 
@@ -76,14 +94,21 @@ export default class VotePage {
             const i : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId);
             users[i].active(true);
             users[i].setEmoji(this.data.emoji as string);
+            
         }
 
         // Adding users of the current batch
         for (var i = 0; i < num; i++) {
             var user : HTMLElement;
 
-            if (i <= users.length)
-                 user = users[i];
+            if (i <= users.length) {
+                user = users[i];
+                user.dataset.action = 'update';
+                user.dataset.params = JSON.stringify({
+                    alias: 'leaders',    
+                    data: { selectedUserId: this.data.users[i].id }
+                });
+            }
             else {
                 user = document.createElement('div');
                 user.classList.add('user-card');
