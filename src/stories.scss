@@ -41,6 +41,8 @@ $themes: (
     "colors": (
       "color-primary": #261C00,
       "color-secondary": #BFBFBF,
+      "button": #BFBFBF,
+      "button-hover": #F4B000,
     ),
     "backgrounds": (
       "bg-primary": "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%)",
@@ -53,12 +55,14 @@ $themes: (
     ),
     "filters": (
       "filter-image": '',
-    )
+    ),
   ),
   "dark": (
     "colors": (
       "color-primary": #FCFBF7,
       "color-secondary": #918F8A,
+      "button": #FCFBF7,
+      "button-hover": #918F8A,
     ),
     "backgrounds": (
       "bg-primary": "radial-gradient(91.67% 122.17% at 69.17% -11.17%, #FFA300 0%, #2D1C00 100%)",
@@ -74,6 +78,10 @@ $themes: (
     )
   )
 );
+
+@mixin element-color($color) {
+  background-image: url('data:image/svg+xml;utf8,<svg ...><g stroke="#{$color}" ... /></g></svg>');
+}
 
 @each $theme-name, $theme-vars in $themes {
   $shadows: map-get($theme-vars, "shadows");
@@ -101,9 +109,9 @@ $themes: (
     // define a css variable for each filter
     @each $name, $filter in $filters {
       --#{$name}: #{$filter};
-    }    
+    }  
   }
-}
+};
 
 
 @mixin zoom($value, $direction: top) {
@@ -114,12 +122,12 @@ $themes: (
 }
 
 /* -----=== Adaptive design mixin ===----- */
-@mixin adapt($orientation, $media: '(":")') {
+@mixin orientation($orientation) {
   @if $orientation == landscape {
-    @media ($landscape) and #{$media} { @content; }
+    @media ($landscape) { @content; }
   }
   @if $orientation == portrait {
-    @media ($portrait) and #{$media} { @content; }
+    @media ($portrait) { @content; }
   }
 }
 
@@ -131,12 +139,18 @@ body {
     background: var(--bg);
 }
 
+button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
 /* MODIFICATORS  */
 .text_truncation {
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
 }
 
 .color_primary {
@@ -147,12 +161,22 @@ body {
   color: var(--color-secondary);
 }
 
+ .background_primary {
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.background_secondary {
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-secondary);
+}
+
 .slide {
   font-family: "CustomRoboto", sans-serif;
   letter-spacing: 0px;
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 0 20px;
+  //padding: 20px 24px 0 24px;
   height: 100%;
   box-sizing: border-box; /* In case to disable window stretching by padding */
 }
@@ -165,28 +189,28 @@ body {
 }
 
 .headline {
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 32px;
-  }
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 32px;
+}
 
 .subhead {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 22px;
-  }
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 22px;
+}
 
 .text {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18px;
-  }
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+}
 
 .caption {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-  }
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
 
 .avatar {
   border-radius: 100px;
@@ -197,6 +221,9 @@ body {
   text-align: center;
   position: relative;
   padding: $no-margin-collapse;
+  padding-bottom: 16px;
+  border-radius: 6px;
+  display: block;
 
   &__avatar {
     display: block;
@@ -211,7 +238,6 @@ body {
   }
 
   &__caption {
-    margin-bottom: 16px;
     color: var(--color-secondary);
   }
 
@@ -225,6 +251,12 @@ body {
     right: 0;
     top: -22px;
   }
+
+  &_hoverable {
+    &:hover  { @extend .background_secondary; }
+  }
+
+  &_active { @extend .background_primary; }
 }
 
 @mixin user-card_style($name-color, $caption-color) {
@@ -246,7 +278,7 @@ body {
   text-align: center;
 
   height: 325px;
-  @include adapt(landscape) { height: 108px; }
+  @include orientation(landscape) { height: 108px; }
 
   &__user-card {
     margin-top: -160px;
@@ -283,31 +315,64 @@ body {
       position: absolute;
       bottom: 16px;
       @include user-card_style(var(--color-primary), var(--color-primary));
-
-    }
-
-    &_background_primary {
-      background: var(--bg-primary);
-      box-shadow: var(--shadow-primary);
-    }
-
-    &_background_secondary {
-      background: var(--bg-secondary);
-      box-shadow: var(--shadow-secondary);
     }
   }
 }
 
 .header {
 
+  padding: 20px 24px 0 24px;
+
   &__title {
     color: var(--color-primary);
-    @include adapt(landscape) { text-align: center; }
+    @include orientation(landscape) { text-align: center; }
    }
 
   &__subtitle {
     margin-top: 8px;
     color: var(--color-secondary);
-    @include adapt(landscape) { text-align: center; }
+    @include orientation(landscape) { text-align: center; }
   }
 }
+
+.button {
+  width: 64px;
+  height: 64px;
+
+  svg {
+    fill: var(--button-hover);
+
+    &:hover {
+      fill: var(--button);
+    }
+  }
+
+  &_disabled {
+    pointer-events: none;
+    svg { fill: var(--button); }
+  }
+
+  &_direction_up { svg { transform: rotate(180deg); } }
+  &_direction_down { }
+}
+
+.user-grid {  
+  display: grid;
+  justify-items: center;
+  margin: 0 24px;
+  height: 100%;
+
+  &__column {   
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  &__button-up   { order: -1; }
+  &__button-down { order: 1;  }
+
+  @include orientation(portrait)  { grid-template-columns: repeat(3, 1fr); }
+  @include orientation(landscape) { grid-template-columns: repeat(5, 1fr); }
+}
+

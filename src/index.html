@@ -11,12 +11,12 @@
             <script>
 
                 var data = {
-                    "alias": "leaders",
+                    "alias": "vote",
                     "data": {
                       "title": "Самый 🔎 внимательный разработчик",
                       "subtitle": "Спринт № 213",
                       "emoji": "🔎",
-                      "selectedUserId": 3,
+                      "selectedUserId": 4,
                       "users": [
                         {"id": 1, "name": "Евгений Дементьев", "avatar": "1.jpg", "valueText": "22 голоса"},
                         {"id": 4, "name": "Вадим Пацев", "avatar": "4.jpg", "valueText": "19 голосов"},
@@ -31,8 +31,7 @@
                         {"id": 3, "name": "Дарья Ковалева", "avatar": "3.jpg", "valueText": "5 голосов"},
                         {"id": 9, "name": "Сергей Бережной", "avatar": "9.jpg", "valueText": "4 голоса"}
                       ]
-                    }
-                  };
+                    }};
 
                 const body = document.querySelector('body');
                 body.innerHTML = window.renderTemplate(data.alias, data.data);

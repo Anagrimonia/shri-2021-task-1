@@ -1,11 +1,13 @@
 import type { User } from '../types/user' ;
 import type { Orientation } from '../types/orientation';
-import UserCard from '../components/UserCard'
-import Podium from '../components/Podium'
-import Header from '../components/Header';
+import UserCard from '../templates/UserCard'
+import Podium from '../templates/Podium'
+import Header from '../templates/Header';
 
 
 export default class LeadersPage {
+    
+    private orientation: Orientation;
     private data : {
         title: String, 
         subtitle: String, 
@@ -13,7 +15,11 @@ export default class LeadersPage {
         selectedUserId?: number,
         users: Array<User>,
     };
-    private orientation: Orientation;
+
+    private props = {
+        'vertical'  : { steps: 3 },
+        'horizontal': { steps: 5 }
+    };
 
     constructor (data: { 
         title: String, 
@@ -29,29 +35,19 @@ export default class LeadersPage {
 
     render() {
 
+        // Defining a number of podium places according to orientation
+        const steps = this.props[this.orientation].steps;
+
         // Base container
         const container = document.createElement('div');
-        container.classList.add('slide', 'leaders');
+        container.classList.add('leaders');
 
-        const header = new Header({ 
-            title: this.data.title as string, 
-            subtitle: this.data.subtitle as string }).render();
-
-        container.append(header);
-
-        // Content block
-        const content = document.createElement('div');
-        content.classList.add('content');
-        container.append(content);
-
-        // Defining a number of podium places according to orientation
-        const num = this.orientation === 'vertical' ? 3 : 5;
-
+        // Creating ar array of winners in descending order
+        // Place number is needed for an audience choice winner
         var winners : { winner: UserCard, place: number }[] = []; 
 
-        for (let i = 0; i < num; i++) { 
-
-            const user = new UserCard({ 
+        for (let i = 0; i < steps; i++) { 
+            const user = new UserCard().render({ 
                 user : this.data.users[i] as User, 
                 caption: true,
                 emoji: i == 0 ? this.data.emoji as string : undefined });
@@ -62,16 +58,17 @@ export default class LeadersPage {
         // If an extra winner exists
         if (this.data.selectedUserId) {
 
+            // Find his index in data
             const extraIndex : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId);
-            
-            const extra = new UserCard({ 
+
+            const extra = new UserCard().render({ 
                 user : this.data.users[extraIndex] as User, 
                 caption: true, 
                 emoji: '👍' });
 
             // If extra winner is on the podium
-            if (extraIndex > 0 && extraIndex < num) 
-                winners[extraIndex].winner.emoji = '👍';
+            if (extraIndex > 0 && extraIndex < steps) 
+                winners[extraIndex].winner.setEmoji('👍');
             
             // If orientation is horizontal & selected user not in first four winners
             else if (this.orientation == 'horizontal' && extraIndex >= 4)
@@ -82,14 +79,19 @@ export default class LeadersPage {
                 winners.push({ winner: extra, place: extraIndex });
         }
 
-        const podium = new Podium({ 
-                winners : winners, 
-                orientation: this.orientation}).render();
+        // Podium component
+        const podium = new Podium().render({ 
+            winners : winners, 
+            orientation: this.orientation});
 
-        content.append(podium);
+        container.append(podium);
 
         return container as HTMLElement;
         
+    }
+
+    setOrientation(orientation : Orientation) {
+        this.orientation = orientation;
     }
 
 }
