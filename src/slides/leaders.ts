@@ -1,34 +1,20 @@
+import type { LeadersData } from '../types/data' ;
 import type { User } from '../types/user' ;
 import type { Orientation } from '../types/orientation';
 import UserCard from '../templates/UserCard'
 import Podium from '../templates/Podium'
 import Header from '../templates/Header';
 
-
 export default class LeadersPage {
     
+    private data: LeadersData;
     private orientation: Orientation;
-    private data : {
-        title: String, 
-        subtitle: String, 
-        emoji: String, 
-        selectedUserId?: number,
-        users: Array<User>,
-    };
-
-    private props = {
+    private params = {
         'vertical'  : { steps: 3 },
         'horizontal': { steps: 5 }
     };
 
-    constructor (data: { 
-        title: String, 
-        subtitle: String, 
-        emoji: String, 
-        selectedUserId?: 
-        number, users: Array<User> 
-    },  orientation: Orientation) { 
-        
+    constructor (data: LeadersData, orientation: Orientation) { 
         this.data = data;
         this.orientation = orientation;
     }
@@ -36,11 +22,11 @@ export default class LeadersPage {
     render() {
 
         // Defining a number of podium places according to orientation
-        const steps = this.props[this.orientation].steps;
+        const steps = this.params[this.orientation].steps;
 
         // Base container
         const container = document.createElement('div');
-        container.classList.add('leaders');
+        container.classList.add('--align_bottom');
 
         // Creating ar array of winners in descending order
         // Place number is needed for an audience choice winner
@@ -93,5 +79,4 @@ export default class LeadersPage {
     setOrientation(orientation : Orientation) {
         this.orientation = orientation;
     }
-
 }

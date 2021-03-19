@@ -16,9 +16,9 @@ export default class Button extends HTMLElement{
 
     disabled(bool: boolean) {
         if (bool) 
-           this.classList.add('button_disabled');
+           this.classList.add('button--disabled');
         else 
-           this.classList.remove('button_disabled');
+           this.classList.remove('button--disabled');
     }
 
     render(props: ButtonProps) {
@@ -26,7 +26,7 @@ export default class Button extends HTMLElement{
         const { direction } = props;
 
         // Base container
-        this.classList.add('button', `button_direction_${direction || 'up'}`);
+        this.classList.add('button', `button--direction_${direction || 'up'}`);
         this.innerHTML = this.svg;
 
         return this;

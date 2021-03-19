@@ -1,4 +1,5 @@
-import type { User } from '../types/user' ;
+import type { VoteData } from '../types/data' ;
+import type { User } from '../types/user';
 import type { Orientation } from '../types/orientation';
 
 import UserCard from '../templates/UserCard'
@@ -7,43 +8,26 @@ import Button from '../templates/Button';
 
 export default class VotePage {
     
+    private data : VoteData;
     private orientation: Orientation;
-
-    private data : {
-        title: String, 
-        subtitle: String, 
-        emoji: String,
-        offset?: number, 
-        selectedUserId?: number,
-        users: Array<User>,
-    };
-
-    private grid = { 
+    private params = { 
         "vertical":   { order: [0, 1, 2, 0, 1, 2, 0, 2], num: 8, cols: 3 }, 
         "horizontal": { order: [0, 1, 3, 4, 1, 3],       num: 6, cols: 5 }
     };
 
-    constructor (data: { 
-        title: String, 
-        subtitle: String, 
-        emoji: String, 
-        offset?: number,
-        selectedUserId?: 
-        number, users: Array<User> 
-    },  orientation: Orientation) { 
-        
+    constructor (data: VoteData, orientation: Orientation) {
         this.data = data;
         this.orientation = orientation;
     }
 
     render() {
 
-        const { order, num, cols } = this.grid[this.orientation];
+        const { order, num, cols } = this.params[this.orientation];
         const offset = this.data.offset || 0;
 
         // Content block
         const container = document.createElement('div');
-        container.classList.add('user-grid');
+        container.classList.add('user-grid', '--align_center');
 
         const buttonUp = new Button().render({ direction: 'up' });
         buttonUp.classList.add('user-grid__button-up');
@@ -114,7 +98,7 @@ export default class VotePage {
                 user.classList.add('user-card');
                 user.style.height = '142px';
             }
-            columns[this.grid[this.orientation].order[i]].append(user);
+            columns[this.params[this.orientation].order[i]].append(user);
         }
 
         return container as HTMLElement;

@@ -1,11 +1,11 @@
-import 'normalize.css';
+import './normalize.css';
 import './stories.scss';
 
 import Header from './templates/Header';
 import type { Orientation } from './types/orientation';
 import LeadersPage from './slides/leaders';
 import VotePage from './slides/vote';
-//import ChartPage from './slides/leaders';
+import ChartPage from './slides/chart';
 //import DiagramPage from './slides/leaders';
 //import ActivityPage from './slides/leaders';
 
@@ -23,7 +23,7 @@ function renderTemplate(alias: String, data: any) {
     switch (alias) {
         case "leaders":    page = new LeadersPage(data, orientation); break;
         case "vote":       page = new VotePage(data, orientation);    break;
-        //case "chart":    page = new LeadersPage(data).render());
+        case "chart":      page = new ChartPage(data, orientation);   break;
         //case "diagram":  page = new LeadersPage(data).render().outerHTML;
         //case "activity": page = new LeadersPage(data).render().outerHTML;
         default:           '';
@@ -36,11 +36,11 @@ function renderTemplate(alias: String, data: any) {
 
     function resize() {
         var current : Orientation = checkOrientation();
-        if (orientation != current) {
-            orientation = current;
-            page.setOrientation(current);
+        //if (orientation != current) {
+        //    orientation = current;
+        //    page.setOrientation(current);
             document.body.innerHTML = render();
-        }
+        //}
     };
 
     function render() : string {
@@ -56,13 +56,11 @@ function renderTemplate(alias: String, data: any) {
         container.append(header);
 
         // Content block
-        const content = document.createElement('div');
+        const content = page.render();
         content.classList.add('content');
         container.append(content);
 
-        content.append(page.render());
-
-         return container.outerHTML;
+        return container.outerHTML;
     }
 
     return render();

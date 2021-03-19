@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = (env) => {
 
@@ -17,7 +18,7 @@ module.exports = (env) => {
     ],
     devServer: {
       contentBase: './build',
-     hot: true,
+      hot: true,
     },
     plugins: [
       new HtmlWebpackPlugin({ 
@@ -32,17 +33,23 @@ module.exports = (env) => {
       }),
       new MiniCssExtractPlugin({
         filename: "stories.css"
-      })
+      }),
+      new ForkTsCheckerWebpackPlugin()
     ],
     module: {
       rules: [
         {
           test: /\.ts?$/,
-          use: 'ts-loader',
+          loader: 'ts-loader',
           exclude: /node_modules/,
+          options:{
+            // disable type checker - we will use it in fork plugin
+            transpileOnly: true 
+          }
         },
         {
           test: /\.css$/,
+          include: path.resolve(__dirname, 'src/normalize.css'),
           use: [
             MiniCssExtractPlugin.loader,
             "css-loader"
@@ -50,9 +57,10 @@ module.exports = (env) => {
         },
         {
           test: /\.s[ac]ss$/i,
+          include: path.resolve(__dirname, 'src/stories.scss'),
           use: [
             MiniCssExtractPlugin.loader,
-            "css-loader", // Translates CSS into CommonJS
+            "css-loader",
             "sass-loader", // Compiles Sass to CSS
           ],
       },

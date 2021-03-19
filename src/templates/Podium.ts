@@ -1,5 +1,5 @@
 import UserCard from '../templates/UserCard' ;
-import type { Orientation } from '../types/Orientation';
+import type { Orientation } from '../types/orientation';
 
 type PodiumProps = {
    winners: { winner: UserCard, place: number }[],
@@ -47,22 +47,22 @@ export default class Podium extends HTMLElement {
             step.append(placeNumber);
 
             // Adding places backgrounds
-            step.classList.add(`background_${i == 0 ? 'primary' : 'secondary' }`);
+            step.classList.add(`--background_${i == 0 ? 'primary' : 'secondary' }`);
 
             // Sorting places positions on podium (ex: 3-1-2, 5-3-1-2-4)
             if (orientation == 'vertical' && i == 3) {
                 step.style.zIndex = String(num);
-                step.classList.add(`podium__step_position_extra`);
-                step.classList.remove(`background_secondary`);
-                placeNumber.classList.add('podium__place-number_position_extra');
+                step.classList.add(`podium__step--position_extra`);
+                step.classList.remove(`--background_secondary`);
+                placeNumber.classList.add('podium__place-number--position_extra');
                 this.append(step);
             }
             else if (i % 2 == 0) {
-                step.classList.add(`podium__step_position_${i == 0 ? 'center' : 'left' }`);
+                step.classList.add(`podium__step--position_${i == 0 ? 'center' : 'left' }`);
                 this.prepend(step);
             }
             else {
-                step.classList.add(`podium__step_position_right`);
+                step.classList.add(`podium__step--position_right`);
                 this.append(step);   
             }    
         }
