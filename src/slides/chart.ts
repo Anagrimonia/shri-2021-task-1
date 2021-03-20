@@ -24,37 +24,38 @@ export default class ChartPage {
         chart.classList.add('chart'); 
         container.append(chart);
 
-        const sprintsNum = Math.floor((window.innerWidth / 2 + 188 + 8) / 64);
+        let sprintsNum = Math.floor((window.innerWidth / 2 + 188 + 8) / 64);
+        if (this.orientation == 'horizontal') sprintsNum += 1;
 
         const maxSprint = Math.max.apply(Math, this.data.values.map((obj) => obj.value))
         const activeSprintIndex = this.data.values.findIndex((obj) => obj.active);
 
         for (let i = activeSprintIndex - sprintsNum + 3; i < activeSprintIndex + 3; i++) {
             
-
+            const { title, value, active } = this.data.values[i] ? this.data.values[i] : { title: '-', value: 0, active: false };
+            
             const sprint = document.createElement('div');
             sprint.classList.add(`chart__sprint`);
+            if (!this.data.values[i]) sprint.style.opacity = '0.3';
             chart.append(sprint);
 
-            if (this.data.values[i]) {
-                let h = this.data.values[i].value / maxSprint * 70;           
-                let bg = activeSprintIndex == i ? 'primary' : 'secondary';
+            let h =  value / maxSprint * 70;           
+            let bg = activeSprintIndex == i ? 'primary' : 'secondary';
 
-                const commits = document.createElement('p');
-                commits.classList.add(`chart__commits`, 'subhead', `--color_${bg}`);
-                commits.innerText = String(this.data.values[i].value);
-                sprint.append(commits);
+            const commits = document.createElement('p');
+            commits.classList.add(`chart__commits`, 'subhead', `--color_${bg}`);
+            commits.innerText = String(value);
+            sprint.append(commits);
 
-                const column = document.createElement('div');
-                column.classList.add(`chart__column`, `--background_${bg}`);
-                column.style.height = `${String(h == 0 ? 2 : h)}%`;
-                sprint.append(column);
+            const column = document.createElement('div');
+            column.classList.add(`chart__column`, `--background_${bg}`);
+            column.style.height = `${String(h == 0 ? 2 : h)}%`;
+            sprint.append(column);
 
-                const num = document.createElement('p');
-                num.classList.add(`chart__number`, 'text');
-                num.innerText = this.data.values[i].title;
-                sprint.append(num); 
-            }
+            const num = document.createElement('p');
+            num.classList.add(`chart__number`, 'text');
+            num.innerText = title;
+            sprint.append(num); 
               
         }
 

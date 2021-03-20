@@ -426,11 +426,12 @@ button {
   flex-grow: 1;
 
   @include orientation(portrait)  { 
-    margin-left: -8px;
+    margin-left: -16px;
   }
 
   @include orientation(landscape) { 
-    width: 552px;
+    width: 100%;
+    justify-content: center;
   }
 
   &__sprint {
@@ -439,7 +440,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: flex-end; 
-    margin-right: 24px;
+    margin: 0 12px;
     min-width: 40px;
   }
 
@@ -480,7 +481,7 @@ button {
   }
   
   @include orientation(landscape) {
-    height: 13%;
+    height: 15%;
     display: flex;
     flex-direction: row;
 
