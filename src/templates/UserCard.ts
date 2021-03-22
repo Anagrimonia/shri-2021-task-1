@@ -32,7 +32,7 @@ export default class UserCard extends HTMLElement {
         if (old) this.removeChild(old);
 
         const p = document.createElement('p');
-        p.classList.add('user-card__name', 'text', 'text_truncation');
+        p.classList.add('user-card__name', 'text', '--text_truncation');
         p.innerText += name;
         this.appendChild(p);
     }
@@ -43,7 +43,7 @@ export default class UserCard extends HTMLElement {
         if (old) this.removeChild(old);
 
         const p = document.createElement('p');
-        p.classList.add('user-card__caption', 'caption', 'text_truncation');
+        p.classList.add('user-card__caption', 'caption', '--text_truncation');
         p.innerText += caption;   
         this.appendChild(p);
     }
@@ -60,13 +60,13 @@ export default class UserCard extends HTMLElement {
     }
 
     hover(bool : boolean) {
-        if (bool) { this.classList.add('user-card_hoverable'); this.active(false) }
-        else this.classList.remove('user-card_hoverable');
+        if (bool) { this.classList.add('user-card--hoverable'); this.active(false) }
+        else this.classList.remove('user-card--hoverable');
     }
 
     active(bool : boolean) {
-        if (bool) { this.classList.add('user-card_active'); this.hover(false) }
-        else this.classList.remove('user-card_active')
+        if (bool) { this.classList.add('user-card--active'); this.hover(false) }
+        else this.classList.remove('user-card--active')
     }
 
     render(props: UserCardProps) {
@@ -76,8 +76,8 @@ export default class UserCard extends HTMLElement {
         // Base container
         this.classList.add(
             'user-card',
-            `user-card_style_${style || 'none'}`, 
-            `user-card_orientation_${orientation || 'vertical'}`);
+            `user-card--style_${style || 'none'}`, 
+            `user-card--${orientation || 'vertical'}`);
 
         this.setAvatar(user.avatar as string);
         this.setName(user.name as string);

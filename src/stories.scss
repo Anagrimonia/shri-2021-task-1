@@ -146,30 +146,34 @@ button {
 }
 
 /* MODIFICATORS  */
-.text_truncation {
+.--text_truncation {
   overflow: hidden;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
 
-.color_primary {
+.--color_primary {
   color: var(--color-primary);
 }
 
-.color_secondary {
+.--color_secondary {
   color: var(--color-secondary);
 }
 
- .background_primary {
+ .--background_primary {
   background: var(--bg-primary);
   box-shadow: var(--shadow-primary);
 }
 
-.background_secondary {
+.--background_secondary {
   background: var(--bg-secondary);
   box-shadow: var(--shadow-secondary);
 }
+
+.--align_top    { justify-content: flex-top; }
+.--align_bottom { justify-content: flex-end; }
+.--align_center { justify-content: flex-center; }
 
 .slide {
   font-family: "CustomRoboto", sans-serif;
@@ -185,7 +189,6 @@ button {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  justify-content: flex-end;
 }
 
 .headline {
@@ -217,46 +220,88 @@ button {
 }
 
 .user-card {
-  width: 104px;
-  text-align: center;
-  position: relative;
-  padding: $no-margin-collapse;
-  padding-bottom: 16px;
+  
+  position: relative; /* For emoji positioning */
   border-radius: 6px;
-  display: block;
 
-  &__avatar {
+  &__avatar { filter: var(--filter-image); }
+  &__name { color: var(--color-primary); }
+  &__caption { color: var(--color-secondary); }
+
+  &--vertical {
+    
     display: block;
-    margin: 20px auto 0 auto;
-    filter: var(--filter-image);
+    height: max-content;
+    width: min-content;
+    padding: 6px 6px 16px 6px;
+    text-align: center;
+
+    .user-card__avatar { 
+      display: block;
+      margin: 16px 16px 0 16px; 
+    }
+
+    .user-card__name {
+      margin-top: 6px;
+      width: 96px;
+      height: 36px;
+    }
+
+    .user-card__caption { 
+      margin-top: 4px;
+      width: 96px;
+      height: 16px;
+    }
+
+    .user-card__emoji { 
+      z-index: 1;
+      font-size: 32px;
+      position: absolute;
+      transform: translate(0, 50%);
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: -22px;
+    }
   }
 
-  &__name {
-    margin: 6px 4px;
-    height: 36px;
-    color: var(--color-primary);
+  &--horizontal {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 40px;
+    padding: 12px;
+
+    .user-card__avatar { 
+      height: 40px;
+      width: 40px;
+      margin-right: 14px;
+    }
+
+    .user-card__name { 
+      white-space: nowrap;
+      width: 266px;
+      height: 16px;
+    }
+
+    .user-card__caption {
+      white-space: nowrap;
+      width: 266px;
+      height: 16px;
+    }
+
+    .user-card__emoji {
+      display: none;
+    }
   }
 
-  &__caption {
-    color: var(--color-secondary);
+  &--hoverable {
+    &:hover  { @extend .--background_secondary; }
   }
 
-  &__emoji {
-    z-index: 1;
-    font-size: 32px;
-    position: absolute;
-    transform: translate(0, 50%);
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: -22px;
-  }
-
-  &_hoverable {
-    &:hover  { @extend .background_secondary; }
-  }
-
-  &_active { @extend .background_primary; }
+  &--active { @extend .--background_primary; }
 }
 
 @mixin user-card_style($name-color, $caption-color) {
@@ -288,7 +333,7 @@ button {
     margin-top: 16px; 
     color: var(--color-primary); 
 
-    &_position_extra {
+    &--position_extra {
       margin-top: 0; 
     }  
   }
@@ -297,21 +342,21 @@ button {
     min-width: max-content;
     border-radius: 6px 6px 0 0;
 
-    &_position_left {
+    &--position_left {
       margin-right: -16px;
       padding-right: 16px;
     }
 
-    &_position_right {
+    &--position_right {
       margin-left: -16px;
       padding-left: 16px;
     }
 
-    &_position_center {
+    &--position_center {
       padding: 0 8px;
     }
 
-    &_position_extra {
+    &--position_extra {
       position: absolute;
       bottom: 16px;
       @include user-card_style(var(--color-primary), var(--color-primary));
@@ -347,13 +392,13 @@ button {
     }
   }
 
-  &_disabled {
+  &--disabled {
     pointer-events: none;
     svg { fill: var(--button); }
   }
 
-  &_direction_up { svg { transform: rotate(180deg); } }
-  &_direction_down { }
+  &--direction_up { svg { transform: rotate(180deg); } }
+  &--direction_down { }
 }
 
 .user-grid {  
@@ -376,3 +421,82 @@ button {
   @include orientation(landscape) { grid-template-columns: repeat(5, 1fr); }
 }
 
+.chart {
+  display: flex;
+  flex-grow: 1;
+
+  @include orientation(portrait)  { 
+    margin-left: -16px;
+  }
+
+  @include orientation(landscape) { 
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__sprint {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    margin: 0 12px;
+    min-width: 40px;
+  }
+
+  &__column {
+    border-radius: 6px;
+  }
+
+  &__commits {
+    margin-bottom: 8px;
+  }
+
+  &__number {
+    @extend .--color_secondary;
+    margin-top: 10px;
+  }
+}
+
+.chart-top {
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include orientation(portrait) {
+    height: 162px;
+    display: flex;
+    flex-direction: column;
+
+    .chart-top__divider {
+      width: 320px;
+      height: 2px;
+    }
+
+    .user-card--horizontal {
+      width: 320px;
+    }
+  }
+  
+  @include orientation(landscape) {
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+
+    .chart-top__divider {
+      width: 2px;
+      height: 40px;
+    }
+
+    .user-card--horizontal {
+      width: 200px;
+    }
+  }
+}
+
+.divider {
+  background: var(--color-secondary);
+  opacity: 0.3;
+}
