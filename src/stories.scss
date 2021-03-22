@@ -45,13 +45,21 @@ $themes: (
       "button-hover": #F4B000,
     ),
     "backgrounds": (
+       "bg": #FFFFFF,
       "bg-primary": "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%)",
       "bg-secondary": "linear-gradient(180deg, rgba(244, 244, 244, 0.9) 0.82%, #E9E9E9 100%, rgba(234, 234, 234, 0) 100%)",
-      "bg": #FFFFFF,
+      "bg-diagram-0": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.56) 81.25%, rgba(255, 239, 153, 0.32) 100%)",
+      "bg-diagram-1": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.24) 81.25%, rgba(255, 239, 153, 0.12) 100%)",
+      "bg-diagram-2": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(166, 166, 166, 0.1725) 82.81%, rgba(203, 203, 203, 0.05) 92.19%)",
+      "bg-diagram-3": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(191, 191, 191, 0.345) 82.81%, rgba(228, 228, 228, 0.1) 92.19%)",
     ),
     "shadows": (
       "shadow-primary": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 176, 57, 0.8)",
       "shadow-secondary": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(207, 207, 207, 0.5)",
+      "shadow-diagram-0": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 176, 57, 0.9)",
+      "shadow-diagram-1": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 176, 57, 0.4)",
+      "shadow-diagram-2": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(105, 105, 105, 0.2)",
+      "shadow-diagram-3": "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(131, 131, 131, 0.6)",
     ),
     "filters": (
       "filter-image": '',
@@ -65,13 +73,21 @@ $themes: (
       "button-hover": #918F8A,
     ),
     "backgrounds": (
+      "bg": "radial-gradient(circle at 50% 50%, #120C01 0%, #000000 100%)",
       "bg-primary": "radial-gradient(91.67% 122.17% at 69.17% -11.17%, #FFA300 0%, #2D1C00 100%)",
       "bg-secondary": "linear-gradient(180deg, rgba(0, 0, 0, 0) -2.22%, rgba(0, 0, 0, 0.8) 100%), radial-gradient(149.08% 95.38% at 38.75% 71.48%, #000000 0%, #231900 0.01%, #4D4D4D 100%)",
-      "bg": "radial-gradient(circle at 50% 50%, #120C01 0%, #000000 100%)",
+      "bg-diagram-0": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 163, 0, 0.8) 71.88%, rgba(91, 58, 0, 0.8) 100%)",
+      "bg-diagram-1": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(99, 63, 0, 0.5) 72.92%, rgba(15, 9, 0, 0.5) 100%)",
+      "bg-diagram-2": "radial-gradient(100% 100% at 50% 0%, rgba(151, 151, 151, 0.5) 0%, rgba(41, 41, 41, 0.5) 100%)",
+      "bg-diagram-3": "radial-gradient(100% 100% at 50% 0%, rgba(62, 62, 62, 0.5) 0%, rgba(40, 40, 40, 0.5) 100%)",
     ),
     "shadows": (
       "shadow-primary": "inset -1px 1px 1px rgba(255, 255, 255, 0.4), inset 0px 6px 15px rgba(255, 162, 0, 0.4)",
       "shadow-secondary": "inset -1px 1px 1px rgba(255, 255, 255, 0.2), inset 2px 2px 16px rgba(103, 103, 103, 0.6)",
+      "shadow-diagram-0": "0px 0px 20px -8px rgba(248, 158, 0, 0.2), inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 162, 0, 0.9)",
+      "shadow-diagram-1": "0px 0px 20px -8px rgba(147, 93, 0, 0.2), inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(202, 129, 0, 0.9)",
+      "shadow-diagram-2": "inset -1px 1px 1px rgba(255, 255, 255, 0.5)",
+      "shadow-diagram-3": "inset -1px 1px 1px rgba(255, 255, 255, 0.5)",
     ),
     "filters": (
       "filter-image": grayscale(100%),
@@ -169,6 +185,26 @@ button {
 .--background_secondary {
   background: var(--bg-secondary);
   box-shadow: var(--shadow-secondary);
+}
+
+.--style-diagram-0 {
+  background: var(--bg-diagram-0);
+  box-shadow: var(--shadow-diagram-0);
+}
+
+.--style-diagram-1 {
+  background: var(--bg-diagram-1);
+  box-shadow: var(--shadow-diagram-1);
+}
+
+.--style-diagram-2 {
+  background: var(--bg-diagram-2);
+  box-shadow: var(--shadow-diagram-2);
+}
+
+.--style-diagram-3 {
+  background: var(--bg-diagram-3);
+  box-shadow: var(--shadow-diagram-3);
 }
 
 .--align_top    { justify-content: flex-top; }
@@ -499,4 +535,114 @@ button {
 .divider {
   background: var(--color-secondary);
   opacity: 0.3;
+}
+
+.pie-chart {
+  &__svg {
+    @include orientation(landscape) { width: 80%; }
+
+  }
+}
+
+.diagram {
+  position: relative;
+  height: max-content;
+  text-align: center;
+
+  
+  @include orientation(landscape) {
+    align-self: center;
+  }
+
+  @include orientation(portrait) {
+    margin-top: 8px;
+    max-width: 600px;
+    width: 100%;
+    align-self: center;
+  }
+
+  &__pie-chart {
+    width: 100%;
+    margin: auto;
+  }
+
+  &__text-block {
+    position: absolute;
+    text-align: center;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    color: var(--color-primary);
+  }
+
+  &__subtitle {
+    color: var(--color-secondary);
+  }
+}
+
+.diagram-page {
+  @include orientation(portrait) {
+    margin: 6.4%;
+    justify-content: center;
+  }
+
+  @include orientation(landscape) {
+    flex-direction: row;
+    align-self: center;
+    width: 90%;
+    height: 100%;
+    padding: 24px 0;
+    justify-content: space-around;
+  }
+}
+
+.diagram-history {
+  display: flex;
+  flex-direction: column;
+
+  @include orientation(portrait) {
+      margin-top: 32;
+  }
+
+  @include orientation(landscape) {
+      width: 50%;
+      align-self: center;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    margin: 16px 0;
+  }
+
+  &__dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  &__title {
+    color: var(--color-primary);
+  }
+
+  &__value {
+    color: var(--color-secondary);
+    margin-left: 16px;
+  }
+
+  &__difference {
+    color: var(--color-secondary);
+    
+  }
+
+  &__divider {
+    height: 2px;
+    width: 100%;
+  }
 }

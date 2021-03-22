@@ -3,11 +3,12 @@ import './stories.scss';
 
 import Header from './templates/Header';
 import type { Orientation } from './types/orientation';
+
 import LeadersPage from './slides/leaders';
 import VotePage from './slides/vote';
 import ChartPage from './slides/chart';
-//import DiagramPage from './slides/leaders';
-//import ActivityPage from './slides/leaders';
+import DiagramPage from './slides/diagram';
+//import ActivityPage from './slides/activity';
 
 function renderTemplate(alias: String, data: any) {
     
@@ -21,11 +22,11 @@ function renderTemplate(alias: String, data: any) {
     var page : any;
 
     switch (alias) {
-        case "leaders":    page = new LeadersPage(data, orientation); break;
-        case "vote":       page = new VotePage(data, orientation);    break;
-        case "chart":      page = new ChartPage(data, orientation);   break;
-        //case "diagram":  page = new LeadersPage(data).render().outerHTML;
-        //case "activity": page = new LeadersPage(data).render().outerHTML;
+        case "leaders":    page = new LeadersPage(data, orientation);  break;
+        case "vote":       page = new VotePage(data, orientation);     break;
+        case "chart":      page = new ChartPage(data, orientation);    break;
+        case "diagram":    page = new DiagramPage(data, orientation);  break;
+        //case "activity": page = new ActivityPage(data, orientation); break;
         default:           '';
     }
 
@@ -36,11 +37,11 @@ function renderTemplate(alias: String, data: any) {
 
     function resize() {
         var current : Orientation = checkOrientation();
-        //if (orientation != current) {
-        //    orientation = current;
-        //    page.setOrientation(current);
+        if (orientation != current) {
+            orientation = current;
+            page.setOrientation(current);
             document.body.innerHTML = render();
-        //}
+        }
     };
 
     function render() : string {
