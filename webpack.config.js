@@ -63,7 +63,13 @@ module.exports = (env) => {
             "css-loader",
             "sass-loader", // Compiles Sass to CSS
           ],
-      },
+        },
+        {
+           test: /\.svg$/,
+           loader: 'svg-sprite-loader',
+           options: {
+           }
+        }
       ],
     },
     resolve: {
