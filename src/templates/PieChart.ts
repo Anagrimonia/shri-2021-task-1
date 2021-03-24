@@ -1,5 +1,5 @@
-import * as filters from "../assets/filters/filters";
-import * as gradients from "../assets/filters/gradients";
+import * as filters from "../helpers/filters";
+import * as gradients from "../helpers/gradients";
 import type { Theme } from "../types/theme";
 
 export default class PieChart extends HTMLElement{
