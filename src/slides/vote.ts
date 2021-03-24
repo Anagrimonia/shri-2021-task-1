@@ -69,7 +69,7 @@ export default class VotePage {
         }
 
         // Getting a batch        
-        const users = this.data.users.slice(offset, num).map(user => {
+        const users = this.data.users.slice(offset, offset + num).map(user => {
             return new UserCard().render({ user: user, hoverable: true });
         });
 
@@ -85,7 +85,7 @@ export default class VotePage {
         for (var i = 0; i < num; i++) {
             var user : HTMLElement;
 
-            if (i <= users.length) {
+            if (i < users.length) {
                 user = users[i];
                 user.dataset.action = 'update';
                 user.dataset.params = JSON.stringify({

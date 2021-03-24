@@ -44,13 +44,16 @@ export default class Podium extends HTMLElement {
             const placeNumber = document.createElement('p');
             placeNumber.classList.add('headline', 'podium__place-number');
             placeNumber.innerText = String(winners[i].place + 1);
-            step.append(placeNumber);
 
             // Adding places backgrounds
             step.classList.add(`--background_${i == 0 ? 'primary' : 'secondary' }`);
 
             // Sorting places positions on podium (ex: 3-1-2, 5-3-1-2-4)
             if (orientation == 'vertical' && i == 3) {
+                let divider = document.createElement('div');
+                divider.classList.add('podium__divider');
+                step.append(divider);
+
                 step.style.zIndex = String(num);
                 step.classList.add(`podium__step--position_extra`);
                 step.classList.remove(`--background_secondary`);
@@ -64,7 +67,9 @@ export default class Podium extends HTMLElement {
             else {
                 step.classList.add(`podium__step--position_right`);
                 this.append(step);   
-            }    
+            }  
+
+            step.append(placeNumber);  
         }
 
         return this;
