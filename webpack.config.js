@@ -29,7 +29,7 @@ module.exports = (env) => {
        }),
       new CopyPlugin({
         patterns: [{ from: 'src/data/data.json', to: "data.json" },
-                   { from: 'src/assets', to: 'assets'}],
+                   { from: 'src/assets/images',  to: "assets/images" }]
       }),
       new MiniCssExtractPlugin({
         filename: "stories.css"
@@ -56,11 +56,12 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.(jpg|png|svg|ttf)$/,
+          test: /\.ttf$/,
           use: {
             loader: 'url-loader',
             options: {
-                limit: 25000
+                limit: 25000,
+                name: "assets/fonts/[name].[ext]"
              }
           }
         },

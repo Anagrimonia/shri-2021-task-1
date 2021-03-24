@@ -22,7 +22,7 @@ export default class UserCard extends HTMLElement {
 
         const img = document.createElement('img');
         img.classList.add('user-card__avatar', 'avatar');
-        img.src = `assets/images/1x/${avatar}`;
+        img.src = `assets/images/${avatar}`;
         this.appendChild(img);
     }
 

@@ -51,15 +51,15 @@ $themes: (
       "filter-image": '',
     ),
     "svg": (
-      "svg-min"   : "url(assets/images/min-light.svg?encoding=base64)",
-      "svg-mid"   : "url(assets/images/mid-light.svg?encoding=base64)",
-      "svg-max"   : "url(assets/images/max-light.svg?encoding=base64)",
-      "svg-extra" : "url(assets/images/extra-light.svg?encoding=base64)",
-      "svg-interval-time" : "url(assets/images/time-light-interval.svg?encoding=base64)",
-      "svg-interval-min"  : "url(assets/images/min-light-interval.svg?encoding=base64)",
-      "svg-interval-mid"  : "url(assets/images/mid-light-interval.svg?encoding=base64)",
-      "svg-interval-max"  : "url(assets/images/max-light-interval.svg?encoding=base64)",
-      "svg-interval-extra": "url(assets/images/extra-light-interval.svg?encoding=base64)",
+      "svg-min"           : "url(assets/svg/min-light.svg)",
+      "svg-mid"           : "url(assets/svg/mid-light.svg)",
+      "svg-max"           : "url(assets/svg/max-light.svg)",
+      "svg-extra"         : "url(assets/svg/extra-light.svg)",
+      "svg-interval-time" : "url(assets/svg/time-light-interval.svg)",
+      "svg-interval-min"  : "url(assets/svg/min-light-interval.svg)",
+      "svg-interval-mid"  : "url(assets/svg/mid-light-interval.svg)",
+      "svg-interval-max"  : "url(assets/svg/max-light-interval.svg)",
+      "svg-interval-extra": "url(assets/svg/extra-light-interval.svg)",
     )
   ),
   "dark": (
@@ -92,15 +92,15 @@ $themes: (
       "filter-image": grayscale(100%),
     ),
     "svg": (
-      "svg-min"   : "url(assets/images/min-dark.svg?encoding=base64)",
-      "svg-mid"   : "url(assets/images/mid-dark.svg?encoding=base64)",
-      "svg-max"   : "url(assets/images/max-dark.svg?encoding=base64)",
-      "svg-extra" : "url(assets/images/extra-dark.svg?encoding=base64)",
-      "svg-interval-time" : "url(assets/images/time-dark-interval.svg?encoding=base64)",
-      "svg-interval-min"  : "url(assets/images/min-dark-interval.svg?encoding=base64)",
-      "svg-interval-mid"  : "url(assets/images/mid-dark-interval.svg?encoding=base64)",
-      "svg-interval-max"  : "url(assets/images/max-dark-interval.svg?encoding=base64)",
-      "svg-interval-extra": "url(assets/images/extra-dark-interval.svg?encoding=base64)",
+      "svg-min"           : "url(assets/svg/min-dark.svg)",
+      "svg-mid"           : "url(assets/svg/mid-dark.svg)",
+      "svg-max"           : "url(assets/svg/max-dark.svg)",
+      "svg-extra"         : "url(assets/svg/extra-dark.svg)",
+      "svg-interval-time" : "url(assets/svg/time-dark-interval.svg)",
+      "svg-interval-min"  : "url(assets/svg/min-dark-interval.svg)",
+      "svg-interval-mid"  : "url(assets/svg/mid-dark-interval.svg)",
+      "svg-interval-max"  : "url(assets/svg/max-dark-interval.svg)",
+      "svg-interval-extra": "url(assets/svg/extra-dark-interval.svg)",
     )
   )
 );
@@ -232,7 +232,6 @@ button {
   letter-spacing: 0px;
   display: flex;
   flex-direction: column;
-  //padding: 20px 24px 0 24px;
   height: 100%;
   box-sizing: border-box; /* In case to disable window stretching by padding */
 }
