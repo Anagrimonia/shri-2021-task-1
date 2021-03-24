@@ -8,7 +8,7 @@ import LeadersPage from './slides/leaders';
 import VotePage from './slides/vote';
 import ChartPage from './slides/chart';
 import DiagramPage from './slides/diagram';
-//import ActivityPage from './slides/activity';
+import ActivityPage from './slides/activity';
 
 function renderTemplate(alias: String, data: any) {
     
@@ -22,12 +22,12 @@ function renderTemplate(alias: String, data: any) {
     var page : any;
 
     switch (alias) {
-        case "leaders":    page = new LeadersPage(data, orientation);  break;
-        case "vote":       page = new VotePage(data, orientation);     break;
-        case "chart":      page = new ChartPage(data, orientation);    break;
-        case "diagram":    page = new DiagramPage(data, orientation);  break;
-        //case "activity": page = new ActivityPage(data, orientation); break;
-        default:           '';
+        case "leaders":  page = new LeadersPage(data, orientation);  break;
+        case "vote":     page = new VotePage(data, orientation);     break;
+        case "chart":    page = new ChartPage(data, orientation);    break;
+        case "diagram":  page = new DiagramPage(data, orientation);  break;
+        case "activity": page = new ActivityPage(data, orientation); break;
+        default:         '';
     }
 
 

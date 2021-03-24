@@ -66,7 +66,7 @@ module.exports = (env) => {
         },
         {
            test: /\.svg$/,
-           loader: 'svg-sprite-loader',
+           loader: 'svg-url-loader',
            options: {
            }
         }
