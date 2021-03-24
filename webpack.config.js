@@ -56,6 +56,15 @@ module.exports = (env) => {
           ]
         },
         {
+          test: /\.(jpg|png|svg|ttf)$/,
+          use: {
+            loader: 'url-loader',
+            options: {
+                limit: 25000
+             }
+          }
+        },
+        {
           test: /\.s[ac]ss$/i,
           include: path.resolve(__dirname, 'src/stories.scss'),
           use: [

@@ -1,4 +1,22 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+@font-face {
+  font-family: "Roboto";
+  src: url("assets/fonts/Roboto-Regular.ttf") format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("assets/fonts/Roboto-Bold.ttf") format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("assets/fonts/Roboto-Medium.ttf") format('truetype');
+  font-weight: 500;
+}
+
 
 /* Document
    ========================================================================== */
