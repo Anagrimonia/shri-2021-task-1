@@ -236,7 +236,7 @@ button {
   box-sizing: border-box; /* In case to disable window stretching by padding */
 }
 
-.content {
+.slide-content {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -610,7 +610,7 @@ button {
 
 .diagram-page {
   @include orientation(portrait) {
-    margin: 6.4%;
+    margin: 6.385%;
     justify-content: center;
   }
 
@@ -629,7 +629,7 @@ button {
   flex-direction: column;
 
   @include orientation(portrait) {
-      margin-top: 32;
+      margin-top: 16px;
   }
 
   @include orientation(landscape) {

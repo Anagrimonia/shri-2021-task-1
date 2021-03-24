@@ -10,7 +10,7 @@ const stops_dark_fill = [
 
 export function dark_fill(n : number) {
   if (n > 3) return '';
-  return `<radialGradient id="dark_fill_${n}" cx="0" cy="0" r="0.9"  gradientUnits="userSpaceOnUse" gradientTransform="rotate(90) scale(119.624)"> \
+  return `<radialGradient id="dark_fill_${n}" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse" gradientTransform="scale(1)"> \
           <stop stop-opacity="${stops_dark_fill[n][0].opacity}" offset="${stops_dark_fill[n][0].offset}" stop-color="${stops_dark_fill[n][0].color}"/> \
           <stop stop-opacity="${stops_dark_fill[n][1].opacity}" offset="${stops_dark_fill[n][1].offset}" stop-color="${stops_dark_fill[n][1].color}"/> \
           </radialGradient>`;
@@ -28,7 +28,7 @@ const stops_light_fill = [
 
 export function light_fill(n : number) {
   if (n > 3) return '';
-  return  `<radialGradient id="light_fill_${n}" cx="0.5" cy="0.5" r="100" gradientUnits="userSpaceOnUse" gradientTransform="rotate(90) scale(119.624)"> \
+  return  `<radialGradient id="light_fill_${n}" cx="0.5" cy="0.5" r="100" gradientUnits="userSpaceOnUse" gradientTransform="scale(1)"> \
           <stop stop-opacity="${stops_light_fill[n][0].opacity}" offset="${stops_light_fill[n][0].offset}" stop-color="${stops_light_fill[n][0].color}"/> \
           <stop stop-opacity="${stops_light_fill[n][1].opacity}" offset="${stops_light_fill[n][1].offset}" stop-color="${stops_light_fill[n][1].color}"/> \
           </radialGradient>`;

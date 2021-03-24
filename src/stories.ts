@@ -58,7 +58,7 @@ function renderTemplate(alias: String, data: any) {
 
         // Content block
         const content = page.render();
-        content.classList.add('content');
+        content.classList.add('slide-content');
         container.append(content);
 
         return container.outerHTML;
