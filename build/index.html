@@ -1,16 +1,16 @@
-<html><head><link rel="stylesheet" href="stories.css"><link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"><link id="icon" rel="icon" type="image/png" sizes="16x16" href="assets/images/1x/favicon-s-dark.png"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"/></head><body><body class="theme_dark"><script type="application/json" src="data.json"></script><script src="stories.js"></script><script>fetch("data.json")
-              .then(res => res.json())
-              .then(data => {
-                var url = new URL(window.location.href);
-                var theme = url.searchParams.get("theme");
-                var alias = url.searchParams.get("alias");
+<html><head><link rel="stylesheet" href="stories.css"><link id="icon" rel="icon" type="image/png" sizes="16x16" href="assets/images/1x/favicon-s-dark.png"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"/></head><body class="theme_dark"><script type="application/json" src="data.json"></script><script src="stories.js"></script><script>fetch("data.json")
+          .then(res => res.json())
+          .then(data => {
+            var url = new URL(window.location.href);
+            var theme = url.searchParams.get("theme");
+            var alias = url.searchParams.get("alias");
 
-                if (!theme || (theme != 'dark' && theme != 'light')) theme = 'dark';
-                if (!alias || alias < 1 || alias > 11) alias = 1;
+            if (!theme || (theme != 'dark' && theme != 'light')) theme = 'dark';
+            if (!alias || alias < 1 || alias > 11) alias = 1;
 
-                document.getElementById('icon').href = `assets/images/1x/favicon-s-${theme}.png`;
+            document.getElementById('icon').href = `assets/images/1x/favicon-s-${theme}.png`;
 
-                const body = document.querySelector('body');
-                body.className = `theme_${theme}`;
-                body.innerHTML = window.renderTemplate(data[alias - 1].alias, data[alias - 1].data);
-              });</script></body></body></html>
+            const body = document.querySelector('body');
+            body.className = `theme_${theme}`;
+            body.innerHTML = window.renderTemplate(data[alias - 1].alias, data[alias - 1].data);
+          });</script></body></html>
