@@ -49,7 +49,7 @@ export default class ChartPage {
 
             const column = document.createElement('div');
             column.classList.add(`chart__column`, `--background_${bg}`);
-            column.style.height = `${String(h == 0 ? 2 : h)}%`;
+            column.style.height = `${h == 0 ? '10px' : String(h) + '%'}`;
             sprint.append(column);
 
             const num = document.createElement('p');

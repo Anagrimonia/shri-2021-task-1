@@ -9,8 +9,8 @@ type PodiumProps = {
 export default class Podium extends HTMLElement {
 
     private margin : { [key: string]: string[] } = { 
-        '3': ['0', '15%', '30%'], 
-        '4': ['0', '15%', '30%', ''],
+        '3': ['0', '13%', '26.5%'], 
+        '4': ['0', '13%', '26.5%', ''],
         '5': ['0', '3%', '3%', '6%', '6%'] 
     }
 

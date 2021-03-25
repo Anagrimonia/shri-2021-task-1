@@ -13,7 +13,8 @@
   "dependencies": {
     "@types/express": "^4.17.11",
     "@types/node": "^14.14.31",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "resolve-url-loader": "^3.1.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^8.0.0",

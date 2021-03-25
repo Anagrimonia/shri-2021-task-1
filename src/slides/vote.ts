@@ -77,7 +77,7 @@ export default class VotePage {
         if (this.data.selectedUserId) {
             const i : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId);
             users[i].active(true);
-            users[i].setEmoji(this.data.emoji as string);
+            users[i].setEmoji('👍' as string);
             
         }
 

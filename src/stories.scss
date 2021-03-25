@@ -51,15 +51,15 @@ $themes: (
       "filter-image": '',
     ),
     "svg": (
-      "svg-min"           : "url(assets/svg/min-light.svg)",
-      "svg-mid"           : "url(assets/svg/mid-light.svg)",
-      "svg-max"           : "url(assets/svg/max-light.svg)",
-      "svg-extra"         : "url(assets/svg/extra-light.svg)",
-      "svg-interval-time" : "url(assets/svg/time-light-interval.svg)",
-      "svg-interval-min"  : "url(assets/svg/min-light-interval.svg)",
-      "svg-interval-mid"  : "url(assets/svg/mid-light-interval.svg)",
-      "svg-interval-max"  : "url(assets/svg/max-light-interval.svg)",
-      "svg-interval-extra": "url(assets/svg/extra-light-interval.svg)",
+      "svg-min"           : "url(assets/images/min-light.png)",
+      "svg-mid"           : "url(assets/images/mid-light.png)",
+      "svg-max"           : "url(assets/images/max-light.png)",
+      "svg-extra"         : "url(assets/images/extra-light.png)",
+      "svg-interval-time" : "url(assets/images/time-light-interval.png)",
+      "svg-interval-min"  : "url(assets/images/min-light-interval.png)",
+      "svg-interval-mid"  : "url(assets/images/mid-light-interval.png)",
+      "svg-interval-max"  : "url(assets/images/max-light-interval.png)",
+      "svg-interval-extra": "url(assets/images/extra-light-interval.png)",
     )
   ),
   "dark": (
@@ -92,15 +92,15 @@ $themes: (
       "filter-image": grayscale(100%),
     ),
     "svg": (
-      "svg-min"           : "url(assets/svg/min-dark.svg)",
-      "svg-mid"           : "url(assets/svg/mid-dark.svg)",
-      "svg-max"           : "url(assets/svg/max-dark.svg)",
-      "svg-extra"         : "url(assets/svg/extra-dark.svg)",
-      "svg-interval-time" : "url(assets/svg/time-dark-interval.svg)",
-      "svg-interval-min"  : "url(assets/svg/min-dark-interval.svg)",
-      "svg-interval-mid"  : "url(assets/svg/mid-dark-interval.svg)",
-      "svg-interval-max"  : "url(assets/svg/max-dark-interval.svg)",
-      "svg-interval-extra": "url(assets/svg/extra-dark-interval.svg)",
+      "svg-min"           : "url(assets/images/min-dark.png)",
+      "svg-mid"           : "url(assets/images/mid-dark.png)",
+      "svg-max"           : "url(assets/images/max-dark.png)",
+      "svg-extra"         : "url(assets/images/extra-dark.png)",
+      "svg-interval-time" : "url(assets/images/time-dark-interval.png)",
+      "svg-interval-min"  : "url(assets/images/min-dark-interval.png)",
+      "svg-interval-mid"  : "url(assets/images/mid-dark-interval.png)",
+      "svg-interval-max"  : "url(assets/images/max-dark-interval.png)",
+      "svg-interval-extra": "url(assets/images/extra-dark-interval.png)",
     )
   )
 );
@@ -284,7 +284,7 @@ button {
     display: block;
     height: max-content;
     width: min-content;
-    padding: 6px 6px 16px 6px;
+    padding: 2px 4px 16px 4px;
     text-align: center;
 
     .user-card__avatar { 
@@ -323,12 +323,13 @@ button {
     justify-content: space-around;
     flex-wrap: wrap;
     height: 40px;
-    padding: 12px;
+    padding: 16px 0;
 
     .user-card__avatar { 
       height: 40px;
       width: 40px;
-      margin-right: 14px;
+      @include orientation(portrait)  { margin-right: 4px; }
+      @include orientation(landscape) { margin-right: 14px; }
     }
 
     .user-card__name { 
@@ -381,7 +382,7 @@ button {
   }
 
   &__place-number {
-    margin-top: 16px; 
+    margin-top: 18px; 
     color: var(--color-primary); 
 
     &--position_extra {
@@ -462,7 +463,7 @@ button {
 .user-grid {  
   display: grid;
   justify-items: center;
-  margin: 0 24px;
+  margin: 0 20px;
   height: 100%;
 
   &__column {   
@@ -475,8 +476,15 @@ button {
   &__button-up   { order: -1; }
   &__button-down { order: 1;  }
 
-  @include orientation(portrait)  { grid-template-columns: repeat(3, 1fr); }
-  @include orientation(landscape) { grid-template-columns: repeat(5, 1fr); }
+  @include orientation(portrait)  { 
+    grid-template-columns: repeat(3, 1fr); 
+    
+  }
+  @include orientation(landscape) {
+   grid-template-columns: repeat(5, 1fr); 
+   .user-grid__column:nth-child(2) { margin-left: 20px; }
+   .user-grid__column:nth-child(4) { margin-right: 20px; }
+ }
 }
 
 .chart {
@@ -484,12 +492,14 @@ button {
   flex-grow: 1;
 
   @include orientation(portrait)  { 
-    margin-left: -16px;
+    margin-left: -20px;
+    margin-top: 40px;
   }
 
   @include orientation(landscape) { 
     width: 100%;
     justify-content: center;
+    margin-top: 38px;
   }
 
   &__sprint {
@@ -535,7 +545,7 @@ button {
     }
 
     .user-card--horizontal {
-      width: 320px;
+      width: 328px;
     }
   }
   
@@ -550,7 +560,8 @@ button {
     }
 
     .user-card--horizontal {
-      width: 200px;
+      width: 220px;
+      padding: 0 16px;
     }
   }
 }
@@ -592,7 +603,7 @@ button {
   &__text-block {
     position: absolute;
     text-align: center;
-    width: 50%;
+    width: 40%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -617,10 +628,11 @@ button {
   @include orientation(landscape) {
     flex-direction: row;
     align-self: center;
-    width: 90%;
+    width: 100%;
     height: 100%;
-    padding: 24px 0;
-    justify-content: space-around;
+    padding: 29px 0;
+    justify-content: start;
+    margin-left: 24px;
   }
 }
 
@@ -633,8 +645,9 @@ button {
   }
 
   @include orientation(landscape) {
-      width: 50%;
+      width: 45.5%;
       align-self: center;
+      margin-left: 10px;
   }
 
   &__row {
@@ -644,8 +657,8 @@ button {
   }
 
   &__dot {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 100%;
     margin-right: 10px;
   }
@@ -694,7 +707,7 @@ button {
   @include orientation(landscape) {
     grid-template-rows: repeat(7, 13px);
     grid-template-columns: repeat(25, 17px);
-    margin-top: -10px;
+    margin-top: -8px;
 
     .activity-chart__polygon:nth-child(24n - 11) { grid-column-start: 2; }
   }
@@ -717,7 +730,7 @@ button {
 .activity-history {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 
   @include orientation(landscape) { 
     margin-bottom: 60px;

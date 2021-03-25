@@ -56,7 +56,7 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.ttf$/,
+          test: /\.(png|jpg|ttf)$/,
           use: {
             loader: 'url-loader',
             options: {
@@ -71,6 +71,7 @@ module.exports = (env) => {
           use: [
             MiniCssExtractPlugin.loader,
             "css-loader",
+            "resolve-url-loader",
             "sass-loader", // Compiles Sass to CSS
           ],
         },
