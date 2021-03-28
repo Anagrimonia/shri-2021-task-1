@@ -70,7 +70,7 @@ export default class LeadersPage {
             winners : winners, 
             orientation: this.orientation});
 
-        container.append(podium);
+        container.append(podium.getElement());
 
         return container as HTMLElement;
         

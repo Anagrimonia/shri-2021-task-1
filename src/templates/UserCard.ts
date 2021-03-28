@@ -9,64 +9,68 @@ type UserCardProps = {
    hoverable?: boolean 
 };
 
-export default class UserCard extends HTMLElement {
+export default class UserCard {
 
+    private element: HTMLElement;
     constructor() { 
-        super()
+        this.element = document.createElement('div');
     }
 
     setAvatar(avatar: string) {
 
-        const old = this.querySelector('.user-card__avatar');
-        if (old) this.removeChild(old);
+        const old = this.element.querySelector('.user-card__avatar');
+        if (old) this.element.removeChild(old);
+
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('user-card__avatar', 'avatar');
+        this.element.appendChild(wrapper);
 
         const img = document.createElement('img');
-        img.classList.add('user-card__avatar', 'avatar');
         img.src = `assets/images/${avatar}`;
-        this.appendChild(img);
+        wrapper.appendChild(img);
     }
 
     setName(name: string) {
         
-        const old = this.querySelector('.user-card__name');
-        if (old) this.removeChild(old);
+        const old = this.element.querySelector('.user-card__name');
+        if (old) this.element.removeChild(old);
 
         const p = document.createElement('p');
         p.classList.add('user-card__name', 'text', '--text_truncation');
         p.innerText += name;
-        this.appendChild(p);
+        this.element.appendChild(p);
     }
 
     setCaption(caption: string) {
 
-        const old = this.querySelector('.user-card__caption');
-        if (old) this.removeChild(old);
+        const old = this.element.querySelector('.user-card__caption');
+        if (old) this.element.removeChild(old);
 
         const p = document.createElement('p');
         p.classList.add('user-card__caption', 'caption', '--text_truncation');
         p.innerText += caption;   
-        this.appendChild(p);
+        this.element.appendChild(p);
     }
 
     setEmoji(emoji: string) {
 
-        const old = this.querySelector('.user-card__emoji');
-        if (old) this.removeChild(old);
+        const old = this.element.querySelector('.user-card__emoji');
+        if (old) this.element.removeChild(old);
 
         const p = document.createElement('p');
         p.classList.add('user-card__emoji');
         p.innerText += emoji;   
-        this.prepend(p);
+        this.element.prepend(p);
     }
 
     hover(bool : boolean) {
-        if (bool) { this.classList.add('user-card--hoverable'); this.active(false) }
-        else this.classList.remove('user-card--hoverable');
+        if (bool) { this.element.classList.add('user-card--hoverable'); this.active(false) }
+        else this.element.classList.remove('user-card--hoverable');
     }
 
     active(bool : boolean) {
-        if (bool) { this.classList.add('user-card--active'); this.hover(false) }
-        else this.classList.remove('user-card--active')
+        if (bool) { this.element.classList.add('user-card--active'); this.hover(false) }
+        else this.element.classList.remove('user-card--active')
     }
 
     render(props: UserCardProps) {
@@ -74,7 +78,7 @@ export default class UserCard extends HTMLElement {
         const { user, caption, style, orientation, emoji, hoverable } = props;
 
         // Base container
-        this.classList.add(
+        this.element.classList.add(
             'user-card',
             `user-card--style_${style || 'none'}`, 
             `user-card--${orientation || 'vertical'}`);
@@ -88,6 +92,8 @@ export default class UserCard extends HTMLElement {
 
         return this;
     }
-}
 
-customElements.define("user-card", UserCard);
+    getElement() : HTMLElement {
+        return this.element;
+    }
+}

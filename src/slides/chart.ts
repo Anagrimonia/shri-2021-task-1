@@ -70,7 +70,7 @@ export default class ChartPage {
                 orientation: 'horizontal'
             });
 
-            chartTop.append(user);
+            chartTop.append(user.getElement());
 
             if (i != 1) {
                 const divider = document.createElement('p');

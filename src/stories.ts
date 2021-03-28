@@ -54,7 +54,7 @@ function renderTemplate(alias: String, data: any) {
             title: data.title as string, 
             subtitle: data.subtitle as string }).render();
 
-        container.append(header);
+        container.append(header.getElement());
 
         // Content block
         const content = page.render();

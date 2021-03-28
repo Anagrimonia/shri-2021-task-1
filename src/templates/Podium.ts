@@ -6,8 +6,9 @@ type PodiumProps = {
    orientation: 'vertical' | 'horizontal' 
 };
 
-export default class Podium extends HTMLElement {
+export default class Podium {
 
+    private element: HTMLElement;
     private margin : { [key: string]: string[] } = { 
         '3': ['0', '13%', '26.5%'], 
         '4': ['0', '13%', '26.5%', ''],
@@ -15,7 +16,7 @@ export default class Podium extends HTMLElement {
     }
 
     constructor() { 
-        super();    
+        this.element = document.createElement('div');
     }
 
     render(props : PodiumProps) {
@@ -23,7 +24,7 @@ export default class Podium extends HTMLElement {
         const { winners, orientation } = props;
 
         // Podium
-        this.classList.add('podium');
+        this.element.classList.add('podium');
 
         // Defining a number of podium places according to orientation
         const num = winners.length;
@@ -37,8 +38,8 @@ export default class Podium extends HTMLElement {
             step.style.marginTop = String(this.margin[num][i]);
 
             // Winner
-            winners[i].winner.classList.add(`podium__user-card`);
-            step.append(winners[i].winner);
+            winners[i].winner.getElement().classList.add(`podium__user-card`);
+            step.append(winners[i].winner.getElement());
 
             // Place number
             const placeNumber = document.createElement('p');
@@ -58,15 +59,15 @@ export default class Podium extends HTMLElement {
                 step.classList.add(`podium__step--position_extra`);
                 step.classList.remove(`--background_secondary`);
                 placeNumber.classList.add('podium__place-number--position_extra');
-                this.append(step);
+                this.element.append(step);
             }
             else if (i % 2 == 0) {
                 step.classList.add(`podium__step--position_${i == 0 ? 'center' : 'left' }`);
-                this.prepend(step);
+                this.element.prepend(step);
             }
             else {
                 step.classList.add(`podium__step--position_right`);
-                this.append(step);   
+                this.element.append(step);   
             }  
 
             step.append(placeNumber);  
@@ -74,6 +75,8 @@ export default class Podium extends HTMLElement {
 
         return this;
     }
-}
 
-customElements.define("user-podium", Podium);
+    getElement() : HTMLElement {
+        return this.element;
+    }
+}

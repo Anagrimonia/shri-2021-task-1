@@ -275,7 +275,16 @@ button {
   position: relative; /* For emoji positioning */
   border-radius: 6px;
 
-  &__avatar { filter: var(--filter-image); }
+  &__avatar { 
+    filter: var(--filter-image); 
+    height: 64px;
+
+    img {
+      border-radius: 50%; 
+      background-image: var(--bg-primary);
+    }
+  }
+
   &__name { color: var(--color-primary); }
   &__caption { color: var(--color-secondary); }
 
@@ -289,7 +298,7 @@ button {
 
     .user-card__avatar { 
       display: block;
-      margin: 16px 16px 0 16px; 
+      margin: 16px 16px 0 16px;
     }
 
     .user-card__name {
@@ -373,8 +382,8 @@ button {
   justify-content: center;
   display: flex;
   text-align: center;
-
-  height: 345px;
+  height: 325px;
+  
   @include orientation(landscape) { height: 108px; }
 
   &__user-card {

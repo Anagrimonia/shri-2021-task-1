@@ -1,6 +1,7 @@
 
 export default class Header {
     
+    private element: HTMLElement;
     title: string;
     subtitle: string;
 
@@ -8,6 +9,7 @@ export default class Header {
         
         const { title, subtitle } = options;
 
+        this.element = document.createElement('div');
         this.title = title;        
         this.subtitle = subtitle;
     }
@@ -15,21 +17,26 @@ export default class Header {
     render() {
 
         // Base container
-        const header = document.createElement('div');
-        header.classList.add('header');
+        this.element.classList.add('header');
 
         // Headline
         const title = document.createElement('h2');
         title.classList.add('headline', 'header__title');
         title.innerText += this.title;
-        header.appendChild(title);
+        this.element.appendChild(title);
 
         // Subhead
         const subtitle = document.createElement('h3');
         subtitle.classList.add('text', 'header__subtitle');
         subtitle.innerText += this.subtitle;
-        header.appendChild(subtitle);
+        this.element.appendChild(subtitle);
 
-        return header as HTMLElement;
+        return this;
     }
+
+    getElement() : HTMLElement {
+        return this.element;
+    }
+
+
 }

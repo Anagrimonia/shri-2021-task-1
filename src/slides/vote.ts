@@ -30,9 +30,9 @@ export default class VotePage {
         container.classList.add('user-grid', '--align_center');
 
         const buttonUp = new Button().render({ direction: 'up' });
-        buttonUp.classList.add('user-grid__button-up');
-        buttonUp.dataset.action = 'update';
-        buttonUp.dataset.params = JSON.stringify({
+        buttonUp.getElement().classList.add('user-grid__button-up');
+        buttonUp.getElement().dataset.action = 'update';
+        buttonUp.getElement().dataset.params = JSON.stringify({
             alias: 'vote',  
             data: {
                 offset: (offset - num > 0) ? offset - num : 0          
@@ -40,9 +40,9 @@ export default class VotePage {
         });
 
         const buttonDown = new Button().render({ direction: 'down' });
-        buttonDown.classList.add('user-grid__button-down');
-        buttonDown.dataset.action = 'update';
-        buttonDown.dataset.params = JSON.stringify({
+        buttonDown.getElement().classList.add('user-grid__button-down');
+        buttonDown.getElement().dataset.action = 'update';
+        buttonDown.getElement().dataset.params = JSON.stringify({
             alias: 'vote',  
             data: {
                 offset: (offset + num < this.data.users.length) ? offset + num : 0          
@@ -63,8 +63,8 @@ export default class VotePage {
             columns.push(column);
 
             if (i + 1 == Math.ceil(cols / 2)) {
-                column.append(buttonUp);
-                column.append(buttonDown);
+                column.append(buttonUp.getElement());
+                column.append(buttonDown.getElement());
             }
         }
 
@@ -86,7 +86,7 @@ export default class VotePage {
             var user : HTMLElement;
 
             if (i < users.length) {
-                user = users[i];
+                user = users[i].getElement();
                 user.dataset.action = 'update';
                 user.dataset.params = JSON.stringify({
                     alias: 'leaders',    

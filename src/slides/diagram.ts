@@ -29,8 +29,8 @@ export default class DiagramPage {
         container.append(diagram);
 
         const pie = new PieChart().render({ percents: percents });
-        pie.classList.add('diagram__pie-chart');
-        diagram.append(pie);
+        pie.getElement().classList.add('diagram__pie-chart');
+        diagram.append(pie.getElement());
 
         const textBlock = document.createElement("div");
         textBlock.classList.add('diagram__text-block');

@@ -2,14 +2,16 @@ import * as filters from "../helpers/filters";
 import * as gradients from "../helpers/gradients";
 import type { Theme } from "../types/theme";
 
-export default class PieChart extends HTMLElement{
+export default class PieChart {
     
+    private element: HTMLElement;
     readonly RAD_DEG = Math.PI / 180.0;
     readonly PI2 = 2 * Math.PI;
     private theme : Theme;
 
     constructor () { 
-        super();
+        this.element = document.createElement('div');
+
         var bodyClass = document.getElementsByTagName('body')[0].className.match(/theme_(.*)/);
         this.theme = bodyClass && bodyClass.length > 1 && (bodyClass[1] =='light' || bodyClass[1] =='dark') ? bodyClass[1] : 'light';
     }
@@ -94,11 +96,11 @@ export default class PieChart extends HTMLElement{
         const offset = 330;
 
         // Base container
-        this.classList.add('pie-chart');
+        this.element.classList.add('pie-chart');
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', "-100 -100 200 200");
         svg.classList.add('pie-chart__svg');
-        this.append(svg);
+        this.element.append(svg);
         
         let sum = 0;
 
@@ -118,6 +120,8 @@ export default class PieChart extends HTMLElement{
 
         return this;
     }
-}
 
-customElements.define("pie-chart", PieChart );
+    getElement() : HTMLElement {
+        return this.element;
+    }
+}
