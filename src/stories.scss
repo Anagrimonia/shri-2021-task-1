@@ -26,17 +26,18 @@ $themes: (
     "colors": (
       "color-primary": #261C00,
       "color-secondary": #BFBFBF,
-      "button": #BFBFBF,
-      "button-hover": #F4B000,
+      "button": #F4B000,
+      "button-hover": #BFBFBF,
     ),
     "backgrounds": (
-       "bg": #FFFFFF,
-      "bg-primary": "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%)",
-      "bg-secondary": "linear-gradient(180deg, rgba(244, 244, 244, 0.9) 0.82%, #E9E9E9 100%, rgba(234, 234, 234, 0) 100%)",
-      "bg-diagram-0": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.56) 81.25%, rgba(255, 239, 153, 0.32) 100%)",
-      "bg-diagram-1": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.24) 81.25%, rgba(255, 239, 153, 0.12) 100%)",
-      "bg-diagram-2": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(166, 166, 166, 0.1725) 82.81%, rgba(203, 203, 203, 0.05) 92.19%)",
-      "bg-diagram-3": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(191, 191, 191, 0.345) 82.81%, rgba(228, 228, 228, 0.1) 92.19%)",
+      "bg"              : #FFFFFF,
+      "bg-primary"      : "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%)",
+      "bg-secondary"    : "linear-gradient(180deg, rgba(244, 244, 244, 0.9) 0.82%, #E9E9E9 100%, rgba(234, 234, 234, 0) 100%)",
+      "bg-chart-primary": "linear-gradient(180deg, #FFF2D1 0.82%, #FFD66C 100%);",
+      "bg-diagram-0"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.56) 81.25%, rgba(255, 239, 153, 0.32) 100%)",
+      "bg-diagram-1"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 184, 0, 0.24) 81.25%, rgba(255, 239, 153, 0.12) 100%)",
+      "bg-diagram-2"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(166, 166, 166, 0.1725) 82.81%, rgba(203, 203, 203, 0.05) 92.19%)",
+      "bg-diagram-3"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(191, 191, 191, 0.345) 82.81%, rgba(228, 228, 228, 0.1) 92.19%)",
     ),
     "shadows": (
       "shadow-primary"  : "inset -1px 1px 1px rgba(255, 255, 255, 0.5), inset 0px 0px 20px rgba(255, 176, 57, 0.8)",
@@ -70,13 +71,14 @@ $themes: (
       "button-hover": #918F8A,
     ),
     "backgrounds": (
-      "bg": "radial-gradient(70.24% 70.24% at 49.87% 29.76%, rgba(18, 12, 1, 0.9) 0%, #000000 100%);",
-      "bg-primary"  : "radial-gradient(91.67% 122.17% at 69.17% -11.17%, #FFA300 0%, #2D1C00 100%)",
-      "bg-secondary": "linear-gradient(180deg, rgba(0, 0, 0, 0) -2.22%, rgba(0, 0, 0, 0.8) 100%), radial-gradient(149.08% 95.38% at 38.75% 71.48%, #000000 0%, #231900 0.01%, #4D4D4D 100%)",
-      "bg-diagram-0": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 163, 0, 0.8) 71.88%, rgba(91, 58, 0, 0.8) 100%)",
-      "bg-diagram-1": "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(99, 63, 0, 0.5) 72.92%, rgba(15, 9, 0, 0.5) 100%)",
-      "bg-diagram-2": "radial-gradient(100% 100% at 50% 0%, rgba(151, 151, 151, 0.5) 0%, rgba(41, 41, 41, 0.5) 100%)",
-      "bg-diagram-3": "radial-gradient(100% 100% at 50% 0%, rgba(62, 62, 62, 0.5) 0%, rgba(40, 40, 40, 0.5) 100%)",
+      "bg"              : "radial-gradient(70.24% 70.24% at 49.87% 29.76%, rgba(18, 12, 1, 0.9) 0%, #000000 100%);",
+      "bg-primary"      : "radial-gradient(91.67% 122.17% at 69.17% -11.17%, #FFA300 0%, #2D1C00 100%)",
+      "bg-secondary"    : "linear-gradient(180deg, rgba(0, 0, 0, 0) -2.22%, rgba(0, 0, 0, 0.8) 100%), radial-gradient(149.08% 95.38% at 38.75% 71.48%, #000000 0%, #231900 0.01%, #4D4D4D 100%)",
+      "bg-chart-primary": "radial-gradient(81.14% 100% at 50% 0%, #FFA300 0%, #2D1C00 100%)",
+      "bg-diagram-0"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(255, 163, 0, 0.8) 71.88%, rgba(91, 58, 0, 0.8) 100%)",
+      "bg-diagram-1"    : "radial-gradient(49.84% 49.84% at 49.84% 50.16%, rgba(99, 63, 0, 0.5) 72.92%, rgba(15, 9, 0, 0.5) 100%)",
+      "bg-diagram-2"    : "radial-gradient(100% 100% at 50% 0%, rgba(151, 151, 151, 0.5) 0%, rgba(41, 41, 41, 0.5) 100%)",
+      "bg-diagram-3"    : "radial-gradient(100% 100% at 50% 0%, rgba(62, 62, 62, 0.5) 0%, rgba(40, 40, 40, 0.5) 100%)",
 
 
     ),
@@ -193,7 +195,7 @@ button {
   color: var(--color-secondary);
 }
 
- .--background_primary {
+.--background_primary {
   background: var(--bg-primary);
   box-shadow: var(--shadow-primary);
 }
@@ -293,12 +295,13 @@ button {
     display: block;
     height: max-content;
     width: min-content;
-    padding: 2px 4px 16px 4px;
     text-align: center;
 
     .user-card__avatar { 
       display: block;
       margin: 16px 16px 0 16px;
+
+      img { height: 64px; }
     }
 
     .user-card__name {
@@ -339,10 +342,13 @@ button {
       width: 40px;
       @include orientation(portrait)  { margin-right: 4px; }
       @include orientation(landscape) { margin-right: 14px; }
+
+      img { height: 40px; }
     }
 
     .user-card__name { 
       white-space: nowrap;
+      margin-bottom: auto;
       width: 266px;
       height: 16px;
     }
@@ -383,11 +389,12 @@ button {
   display: flex;
   text-align: center;
   height: 325px;
-  
+
   @include orientation(landscape) { height: 108px; }
 
   &__user-card {
     margin-top: -160px;
+    padding: 2px 4px 16px 4px;
   }
 
   &__place-number {
@@ -403,7 +410,7 @@ button {
     width: 60px;
     height: 1px;
     background: var(--color-secondary);
-    margin: -8px auto 6px auto;
+    margin: -7px auto 6px auto;
   }
 
   &__step {
@@ -426,7 +433,7 @@ button {
 
     &--position_extra {
       position: absolute;
-      bottom: 36px;
+      bottom: 16px;
       @include user-card_style(var(--color-primary), var(--color-primary));
     }
   }
@@ -451,18 +458,21 @@ button {
 .button {
   width: 64px;
   height: 64px;
+  user-select: none;
+  cursor: pointer;
+  outline: none;
 
   svg {
-    fill: var(--button-hover);
+    fill: var(--button);
 
     &:hover {
-      fill: var(--button);
+      fill: var(--button-hover);
     }
   }
 
   &--disabled {
     pointer-events: none;
-    svg { fill: var(--button); }
+    svg { fill: var(--button-hover); }
   }
 
   &--direction_up { svg { transform: rotate(180deg); } }
@@ -472,7 +482,6 @@ button {
 .user-grid {  
   display: grid;
   justify-items: center;
-  margin: 0 20px;
   height: 100%;
 
   &__column {   
@@ -486,14 +495,20 @@ button {
   &__button-down { order: 1;  }
 
   @include orientation(portrait)  { 
+    margin: 0 20px;
     grid-template-columns: repeat(3, 1fr); 
+    .user-card--vertical { padding: 4px 4px 16px 4px; }
     
   }
   @include orientation(landscape) {
-   grid-template-columns: repeat(5, 1fr); 
+   margin: 0 21px;
+   grid-template-columns: repeat(5, 1fr);
+   .user-grid__column:nth-child(1) { margin-right: 1px; } 
    .user-grid__column:nth-child(2) { margin-left: 20px; }
    .user-grid__column:nth-child(4) { margin-right: 20px; }
- }
+   .user-grid__column:nth-child(5) { margin-left: 1px; }
+   .user-card--vertical { padding: 4px 4px 16px 4px; }
+  }
 }
 
 .chart {
@@ -502,13 +517,11 @@ button {
 
   @include orientation(portrait)  { 
     margin-left: -20px;
-    margin-top: 40px;
   }
 
   @include orientation(landscape) { 
     width: 100%;
     justify-content: center;
-    margin-top: 38px;
   }
 
   &__sprint {
@@ -523,6 +536,16 @@ button {
 
   &__column {
     border-radius: 6px;
+
+    &--bg_primary { 
+      background: var(--bg-chart-primary);
+      box-shadow: var(--shadow-primary);
+    }
+
+    &--bg_secondary { 
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-secondary);
+    }
   }
 
   &__commits {
@@ -532,7 +555,7 @@ button {
 
   &__number {
     @extend .--color_secondary;
-    margin-top: 10px;
+    margin-top: 12px;
   }
 }
 
@@ -553,9 +576,8 @@ button {
       height: 2px;
     }
 
-    .user-card--horizontal {
-      width: 328px;
-    }
+    .user-card--horizontal { width: 328px; }
+    .user-card__avatar { margin-right: 7px; }
   }
   
   @include orientation(landscape) {
@@ -595,13 +617,14 @@ button {
   
   @include orientation(landscape) {
     align-self: center;
+    .diagram__text-block { width: 40%; }
   }
 
   @include orientation(portrait) {
-    margin-top: 8px;
     max-width: 600px;
     width: 100%;
     align-self: center;
+    .diagram__text-block { width: 50%; }
   }
 
   &__pie-chart {
@@ -612,7 +635,6 @@ button {
   &__text-block {
     position: absolute;
     text-align: center;
-    width: 40%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -630,7 +652,7 @@ button {
 
 .diagram-page {
   @include orientation(portrait) {
-    margin: 6.385%;
+    margin: 22px 6.385% 0 6.385%;
     justify-content: center;
   }
 
@@ -708,7 +730,7 @@ button {
   @include orientation(portrait)  {
     grid-template-rows: repeat(24, 16.72px);
     grid-template-columns: repeat(15, 21.865px);
-    margin-top: -5px;
+    margin-top: -7px;
 
     .activity-chart__polygon:nth-child(14n - 6) { grid-column-start: 2; }
   }

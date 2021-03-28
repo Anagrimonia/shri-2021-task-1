@@ -18,7 +18,7 @@ export default class ChartPage {
 
         // Content block
         const container = document.createElement('div');
-        container.classList.add('--align_center');
+        container.classList.add('--align_bottom');
 
         const chart = document.createElement('div');
         chart.classList.add('chart'); 
@@ -39,16 +39,16 @@ export default class ChartPage {
             if (!this.data.values[i]) sprint.style.opacity = '0.3';
             chart.append(sprint);
 
-            let h =  value / maxSprint * 70;           
+            let h =  value / maxSprint * 70 * (this.orientation === 'horizontal' ? 0.8 : 0.9);           
             let bg = activeSprintIndex == i ? 'primary' : 'secondary';
 
             const commits = document.createElement('p');
             commits.classList.add(`chart__commits`, 'subhead', `--color_${bg}`);
-            commits.innerText = String(value);
+            commits.innerText = value != 0 ? String(value) : '';
             sprint.append(commits);
 
             const column = document.createElement('div');
-            column.classList.add(`chart__column`, `--background_${bg}`);
+            column.classList.add(`chart__column`, `chart__column--bg_${bg}`);
             column.style.height = `${h == 0 ? '10px' : String(h) + '%'}`;
             sprint.append(column);
 

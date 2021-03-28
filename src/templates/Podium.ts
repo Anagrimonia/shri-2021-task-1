@@ -10,8 +10,8 @@ export default class Podium {
 
     private element: HTMLElement;
     private margin : { [key: string]: string[] } = { 
-        '3': ['0', '13%', '26.5%'], 
-        '4': ['0', '13%', '26.5%', ''],
+        '3': ['0', '13.3%', '26.5%'], 
+        '4': ['0', '13.3%', '26.5%', ''],
         '5': ['0', '3%', '3%', '6%', '6%'] 
     }
 

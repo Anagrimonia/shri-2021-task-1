@@ -23,6 +23,7 @@ export default class DiagramPage {
         // Content block
         const container = document.createElement('div');
         container.classList.add('diagram-page');
+        container.classList.add('--align_bottom');
 
         const diagram = document.createElement("div");
         diagram.classList.add('diagram');
