@@ -29,6 +29,7 @@ export default class DiagramPage {
         diagram.classList.add('diagram');
         container.append(diagram);
 
+        // Pie chart creation 
         const pie = new PieChart().render({ percents: percents });
         pie.getElement().classList.add('diagram__pie-chart');
         diagram.append(pie.getElement());
@@ -51,6 +52,7 @@ export default class DiagramPage {
         history.classList.add('diagram-history');
         container.append(history);
 
+        // Pie chart history creation
         for (let i = 0; i < this.data.categories.length; i++) {
 
             var { title, valueText, differenceText } = this.data.categories[i];

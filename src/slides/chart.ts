@@ -16,7 +16,6 @@ export default class ChartPage {
 
     render() {
 
-        // Content block
         const container = document.createElement('div');
         container.classList.add('--align_bottom');
 
@@ -24,12 +23,14 @@ export default class ChartPage {
         chart.classList.add('chart'); 
         container.append(chart);
 
+        // Counting the max number of columns on the page
         let sprintsNum = Math.floor((window.innerWidth / 2 + 188 + 8) / 64);
         if (this.orientation == 'horizontal') sprintsNum += 1;
 
         const maxSprint = Math.max.apply(Math, this.data.values.map((obj) => obj.value))
         const activeSprintIndex = this.data.values.findIndex((obj) => obj.active);
 
+        // Chart creation
         for (let i = activeSprintIndex - sprintsNum + 3; i < activeSprintIndex + 3; i++) {
             
             const { title, value, active } = this.data.values[i] ? this.data.values[i] : { title: '-', value: 0, active: false };
@@ -59,6 +60,7 @@ export default class ChartPage {
               
         }
 
+        // Chart history creation
         const chartTop = document.createElement('div');
         chartTop.classList.add('chart-top'); 
         container.append(chartTop);        

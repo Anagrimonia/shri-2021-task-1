@@ -23,6 +23,7 @@ export default class ActivityPage {
         const { hours, text } = this.params[this.orientation];
         var arr = [];
 
+        // 24 hours for vertical orientation, 12 for horizontal
         for (let i = 0; i < 7; i++) {
             arr.push([] as number[]);
             for (let j = 0; j < 24; j += hours) {
@@ -39,14 +40,14 @@ export default class ActivityPage {
         
         const segments = [0, 0, 0, 0];
 
+       // Finding an upper bound of commits per day number
         var maxDay = arr.map((day) => Math.max.apply(Math, day));
         segments[3] = Math.max.apply(null, maxDay);
 
         for (let i = 1; i < 3; i++)
             segments[i] = segments[i - 1] + (Math.floor(segments[3] / 3)) ;
 
-        
-        // Content block
+
         const container = document.createElement('div');
         container.classList.add('activity-page');
 
@@ -56,6 +57,7 @@ export default class ActivityPage {
         
         let [n, m] = this.orientation == 'horizontal' ? [7, 24 / hours] : [24 / hours, 7];
 
+        // Activity chart creation
         for (let i = 0; i < n; i++) {
             for (let j = 0; j < m; j++) {
                 
@@ -75,6 +77,7 @@ export default class ActivityPage {
         history.classList.add('activity-history');
         container.append(history);
 
+        // Chart history creation
         for (let i = 0; i < 5; i++) {
             const interval = document.createElement('div');
             interval.classList.add(`activity-history__interval-${i}`, 'activity-history__interval');

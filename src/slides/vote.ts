@@ -25,7 +25,6 @@ export default class VotePage {
         const { order, num, cols } = this.params[this.orientation];
         const offset = this.data.offset || 0;
 
-        // Content block
         const container = document.createElement('div');
         container.classList.add('user-grid', '--align_center');
 
