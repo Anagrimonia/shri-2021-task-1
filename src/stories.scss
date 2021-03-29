@@ -179,6 +179,10 @@ button {
   padding: 0;
 }
 
+svg, path {
+  pointer-events: none;
+}
+
 /* MODIFICATORS  */
 .--text_truncation {
   overflow: hidden;

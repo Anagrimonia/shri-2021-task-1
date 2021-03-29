@@ -74,10 +74,11 @@ export default class VotePage {
 
         // Selecting selected user :)
         if (this.data.selectedUserId) {
-            const i : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId);
-            users[i].active(true);
-            users[i].setEmoji('👍' as string);
-            
+            const i : number = this.data.users.findIndex(x => x.id === this.data.selectedUserId) - offset;
+            if (i >= 0 && i < users.length) {
+                users[i].active(true);
+                users[i].setEmoji('👍' as string);
+            } 
         }
 
         // Adding users of the current batch

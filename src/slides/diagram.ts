@@ -18,7 +18,6 @@ export default class DiagramPage {
         const commits = this.data.categories.map(i => Number(i.valueText.substr(0, i.valueText.indexOf(' '))));
         const sum = commits.reduce((prev, next) => prev + next);
         const percents = commits.map(i => i / sum * 100);
-        console.log(percents);
 
         // Content block
         const container = document.createElement('div');
